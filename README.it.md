@@ -112,24 +112,33 @@ Si apre il browser. **Accedi con Google o Apple.** Questa è tutta l'installazio
 
 ---
 
-## Installa la skill (consigliato)
+## Installa la skill
 
-La skill insegna al tuo assistente *quando* ricordare e richiamare, così la memoria diventa automatica. `npx secondbrain-connect` la installa già. Per farlo a mano:
+La skill insegna al tuo assistente *quando* ricordare e richiamare, così la memoria diventa automatica. Ogni strumento tiene le skill in una sua cartella, quindi scegli il tuo qui sotto. (Per Claude la installa già `npx secondbrain-connect`.)
 
-**Claude Code** (in un modo o nell'altro):
-- Chiedi direttamente a Claude Code: *"Installa la skill da https://github.com/fed3c3sa/secondbrain-shared-memory nella cartella ~/.claude/skills."*
-- Oppure lancia questa riga (Mac / Linux):
-  ```bash
-  mkdir -p ~/.claude/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.claude/skills/secondbrain-memory/SKILL.md
-  ```
-- Poi avvia una nuova sessione.
+**Claude Code.** Chiediglielo e basta: *"Installa la skill da https://github.com/fed3c3sa/secondbrain-shared-memory in ~/.claude/skills."* Oppure lancia una riga e avvia una nuova sessione:
 
-**Claude Desktop:** carica lo zip già pronto.
-1. Scarica **[secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip)**.
-2. In Claude Desktop apri **Impostazioni → Capabilities → Skills** (attiva le Skills se te lo chiede).
-3. **Carica** lo zip appena scaricato, attivalo, e hai finito.
+```bash
+mkdir -p ~/.claude/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.claude/skills/secondbrain-memory/SKILL.md
+```
 
-**Cursor, Codex e altre app:** non devi installare niente. La skill è una funzione di Claude, e in queste app la memoria funziona già una volta che ti sei collegato.
+**Cursor.** Cursor legge anche `~/.claude/skills/`, quindi la riga qui sopra lo copre già. Per aggiungerla a un solo progetto, mettila in `.cursor/skills/` e ricarica la finestra (Cmd/Ctrl+Shift+P, "Developer: Reload Window"):
+
+```bash
+mkdir -p .cursor/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o .cursor/skills/secondbrain-memory/SKILL.md
+```
+
+**Codex.** Lancia una riga, poi controlla con `/skills`:
+
+```bash
+mkdir -p ~/.agents/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.agents/skills/secondbrain-memory/SKILL.md
+```
+
+**Claude Desktop.** Scarica **[secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip)**, poi nell'app apri **Impostazioni → Capabilities → Skills**, carica lo zip e attivalo.
+
+**Qualsiasi altra app con le skill.** Metti lo stesso `SKILL.md` nella sua cartella delle skill (le più comuni leggono `.agents/skills/` o `~/.agents/skills/`).
+
+> **Su Windows**, usa le stesse cartelle nella tua home utente, per esempio `%USERPROFILE%\.claude\skills\secondbrain-memory\SKILL.md`, e salva lì il file [SKILL.md](skill/secondbrain-memory/SKILL.md).
 
 ---
 
