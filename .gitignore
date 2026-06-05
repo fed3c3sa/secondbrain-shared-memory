@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Editor / OS cruft
+*.swp
+Thumbs.db
+
+# Never commit secrets or generated configs that contain tokens
+.secondbrain/
+credentials.json
+.mcp.json
+**/.mcp.json
