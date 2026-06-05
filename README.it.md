@@ -46,7 +46,7 @@ Di solito la tua AI riparte da zero a ogni conversazione. Le rispieghi chi sei, 
 
 SecondBrain è la tua app di memoria personale, per iPhone e Android. Parla o scrivi: trasforma quello che dici in note ordinate, le sistema da sola nelle cartelle giuste e tiene tutto a portata di ricerca in un unico posto. La memoria condivisa che usano i tuoi assistenti AI è costruita su queste stesse note, quindi quello che salvi nell'app e quello che salva il tuo assistente stanno insieme.
 
-Scarica l'app: **[Google Play](https://play.google.com/store/apps/details?id=app.secondbrain.android)** · iPhone e altro su **[secondbrain.icu](https://secondbrain.icu)**.
+Scarica l'app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** · **[Google Play (Android)](https://play.google.com/store/apps/details?id=app.secondbrain.android)**.
 
 ---
 
