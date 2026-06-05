@@ -112,6 +112,26 @@ Si apre il browser. **Accedi con Google o Apple.** Questa è tutta l'installazio
 
 ---
 
+## Installa la skill (consigliato)
+
+La skill insegna al tuo assistente *quando* ricordare e richiamare, così la memoria diventa automatica. `npx secondbrain-connect` la installa già. Per farlo a mano:
+
+**Claude Code** (in un modo o nell'altro):
+- Chiedi direttamente a Claude Code: *"Installa la skill da https://github.com/fed3c3sa/secondbrain-shared-memory nella cartella ~/.claude/skills."*
+- Oppure lancia questa riga (Mac / Linux):
+  ```bash
+  mkdir -p ~/.claude/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.claude/skills/secondbrain-memory/SKILL.md
+  ```
+- Poi avvia una nuova sessione.
+
+**Claude Desktop:** salva il file [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) qui, poi chiudi e riapri l'app:
+- Mac: `~/.claude/skills/secondbrain-memory/SKILL.md`
+- Windows: `%USERPROFILE%\.claude\skills\secondbrain-memory\SKILL.md`
+
+**Cursor, Codex e altre app:** non devi installare niente. La skill è una funzione di Claude, e in queste app la memoria funziona già una volta che ti sei collegato.
+
+---
+
 ## Funziona con
 
 Claude (Desktop e Code), Cursor e altre app di AI. Il comando configura da solo tutto quello che trova sul tuo computer. Hai un nuovo dispositivo? Lancia il comando anche lì: la memoria è la stessa ovunque.

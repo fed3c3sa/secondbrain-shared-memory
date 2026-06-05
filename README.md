@@ -112,6 +112,26 @@ Fully **quit and reopen** your assistant (close the whole app, not just the wind
 
 ---
 
+## Install the skill (recommended)
+
+The skill teaches your assistant *when* to remember and recall, so the memory feels automatic. `npx secondbrain-connect` already installs it. To do it by hand:
+
+**Claude Code** (either way):
+- Just ask Claude Code: *"Install the skill from https://github.com/fed3c3sa/secondbrain-shared-memory into my ~/.claude/skills folder."*
+- Or run this one line (Mac / Linux):
+  ```bash
+  mkdir -p ~/.claude/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.claude/skills/secondbrain-memory/SKILL.md
+  ```
+- Then start a new session.
+
+**Claude Desktop:** save the file [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) here, then quit and reopen the app:
+- Mac: `~/.claude/skills/secondbrain-memory/SKILL.md`
+- Windows: `%USERPROFILE%\.claude\skills\secondbrain-memory\SKILL.md`
+
+**Cursor, Codex, and other apps:** nothing to install. The skill is a Claude feature, and your memory already works in these apps once you have connected.
+
+---
+
 ## Works with
 
 Claude (Desktop and Code), Cursor, and other AI apps. The connect command sets up everything it finds on your computer automatically. Got a new device? Just run the command there too, it is the same memory everywhere.
