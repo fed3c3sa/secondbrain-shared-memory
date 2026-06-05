@@ -9,8 +9,8 @@ Get `YOUR_TOKEN` here → [How to get your token](manual-setup.md#how-to-get-you
 
 There are two shapes of config depending on what the client supports:
 
-- **Remote HTTP** (the native way) — give it the URL + header directly.
-- **stdio bridge** (works everywhere) — wrap the remote server with `mcp-remote`:
+- **Remote HTTP** (the native way) - give it the URL + header directly.
+- **stdio bridge** (works everywhere) - wrap the remote server with `mcp-remote`:
   ```bash
   npx -y mcp-remote https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp \
     --header "Authorization: Bearer YOUR_TOKEN"
@@ -18,7 +18,7 @@ There are two shapes of config depending on what the client supports:
 
 ---
 
-## VS Code (GitHub Copilot — agent mode)
+## VS Code (GitHub Copilot - agent mode)
 
 VS Code supports MCP servers. Create **`.vscode/mcp.json`** in your workspace (or add via the Command Palette → **MCP: Add Server**):
 
@@ -84,7 +84,7 @@ If your version doesn't support `httpUrl`, use the `mcp-remote` bridge form inst
 
 ChatGPT supports MCP through **connectors / Developer mode** on eligible paid plans (Plus / Pro / Business / Enterprise). In **Settings → Connectors**, add a custom MCP server and paste the **URL** above.
 
-> ⚠️ Honest note: ChatGPT's connector UI is evolving and its support for a custom `Authorization: Bearer` header varies by plan and rollout. If the UI lets you set a custom header, use the URL + `Authorization: Bearer YOUR_TOKEN`. If it only offers OAuth or no-auth connectors, header-token auth may not be available there yet — in that case use a client from the sections above. Claude, Cursor, VS Code, Windsurf, and Gemini CLI all support it today.
+> ⚠️ Honest note: ChatGPT's connector UI is evolving and its support for a custom `Authorization: Bearer` header varies by plan and rollout. If the UI lets you set a custom header, use the URL + `Authorization: Bearer YOUR_TOKEN`. If it only offers OAuth or no-auth connectors, header-token auth may not be available there yet - in that case use a client from the sections above. Claude, Cursor, VS Code, Windsurf, and Gemini CLI all support it today.
 
 ---
 

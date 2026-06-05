@@ -1,6 +1,6 @@
 # Manual setup & getting your token
 
-Most people never need this — `npx secondbrain-connect` configures Claude Code, Claude Desktop, and Cursor automatically. Use this page if your client isn't auto-detected, or you want to wire it up by hand.
+Most people never need this - `npx secondbrain-connect` configures Claude Code, Claude Desktop, and Cursor automatically. Use this page if your client isn't auto-detected, or you want to wire it up by hand.
 
 ---
 
@@ -37,7 +37,7 @@ You must be a **Pro** subscriber. The token is minted during sign-in. The cleane
      }
    }
    ```
-4. Copy the `sbm_…` value — that's `YOUR_TOKEN`. Use it in any client.
+4. Copy the `sbm_…` value - that's `YOUR_TOKEN`. Use it in any client.
 
 > The token also appears in the configs the CLI writes for detected clients (e.g. `~/.cursor/mcp.json`, `~/.claude.json`, or the Claude Desktop config). If a client was configured, you can read the token from there too.
 

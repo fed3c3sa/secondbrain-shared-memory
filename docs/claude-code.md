@@ -41,7 +41,7 @@ claude mcp add --transport http secondbrain \
 ```
 Or simply: `npx secondbrain-connect --project` (writes `.mcp.json` in the folder you're in).
 
-> ⚠️ A `.mcp.json` committed to a repo contains your **token**. Don't commit it to a public repo — keep project-scope configs out of version control, or use user scope.
+> ⚠️ A `.mcp.json` committed to a repo contains your **token**. Don't commit it to a public repo - keep project-scope configs out of version control, or use user scope.
 
 ---
 

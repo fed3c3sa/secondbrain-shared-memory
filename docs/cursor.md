@@ -31,9 +31,9 @@ It detects Cursor and writes `~/.cursor/mcp.json`. Restart Cursor (or toggle the
 
 3. Open **Cursor → Settings → MCP** (or **Cursor Settings → Tools & Integrations**) and confirm `secondbrain` is enabled (green). Toggle it off/on if it doesn't connect immediately.
 
-> Some Cursor versions support adding an MCP server straight from the Settings UI — paste the URL and the `Authorization: Bearer YOUR_TOKEN` header there instead of editing JSON.
+> Some Cursor versions support adding an MCP server straight from the Settings UI - paste the URL and the `Authorization: Bearer YOUR_TOKEN` header there instead of editing JSON.
 
-> ⚠️ A project-level `.cursor/mcp.json` contains your **token** — don't commit it to a public repo.
+> ⚠️ A project-level `.cursor/mcp.json` contains your **token** - don't commit it to a public repo.
 
 ---
 

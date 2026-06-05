@@ -5,13 +5,19 @@
   <img alt="SecondBrain" src="assets/brain-icon-dark.png" width="92">
 </picture>
 
-# SecondBrain — Shared Memory for any AI
+# SecondBrain - Shared Memory for any AI
 
-**Give Claude, Cursor, ChatGPT, Gemini, and any MCP-capable assistant one shared, persistent memory — backed by your own [SecondBrain](https://secondbrain.icu) notes.**
+**Give Claude, Cursor, ChatGPT, Gemini, and any MCP-capable assistant one shared, persistent memory - backed by your own [SecondBrain](https://secondbrain.icu) notes.**
 
 Save a fact in one assistant, recall it in another. Stop starting from zero every session.
 
-[Website](https://secondbrain.icu) · [Quick start](#-quick-start-2-minutes) · [Install Node](#step-1--install-nodejs-gives-you-npm--npx) · [Per-app guides](#-connect-your-app) · [Troubleshooting](#-troubleshooting)
+[Website](https://secondbrain.icu) · [Quick start](#-quick-start-2-minutes) · [Install Node](#step-1-install-nodejs) · [Per-app guides](#-connect-your-app) · [Troubleshooting](#-troubleshooting)
+
+**🇬🇧 English** · [🇮🇹 Italiano](README.it.md)
+
+<br>
+
+<img src="assets/how-it-works.svg" alt="How it works: your AI assistants remember and recall through one shared SecondBrain memory" width="820">
 
 </div>
 
@@ -23,13 +29,28 @@ SecondBrain is your personal, persistent memory. This repo is the **end-to-end g
 
 Once connected, your assistant can:
 
-- **Recall** what you told it in past sessions — across *every* assistant you connect.
+- **Recall** what you told it in past sessions - across *every* assistant you connect.
 - **Remember** durable facts, decisions, fixes, preferences, and project notes into *your own* SecondBrain folders.
 - **Connect** related notes together, and set **calendar events / reminders** that show up in the app.
 
-Everything runs **server-side** in your own SecondBrain. Your memories are ordinary notes in your folder tree — visible and editable in the SecondBrain app, and shared by all your assistants. A note Claude saves shows up when ChatGPT searches, and vice-versa.
+Everything runs **server-side** in your own SecondBrain. Your memories are ordinary notes in your folder tree - visible and editable in the SecondBrain app, and shared by all your assistants. A note Claude saves shows up when ChatGPT searches, and vice-versa.
 
 > **One command sets it all up:** `npx secondbrain-connect`
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="25%"><img src="assets/screenshots/app-chat.png" width="200" alt="Talk to it"><br><sub><b>Just ask</b> - talk to it</sub></td>
+<td align="center" width="25%"><img src="assets/screenshots/app-notes.png" width="200" alt="Perfect notes"><br><sub><b>Perfect notes</b>, structured</sub></td>
+<td align="center" width="25%"><img src="assets/screenshots/app-folders.png" width="200" alt="Auto-filed"><br><sub><b>Auto-filed</b> in folders</sub></td>
+<td align="center" width="25%"><img src="assets/screenshots/app-calendar.png" width="200" alt="Calendar & reminders"><br><sub><b>Calendar</b> & reminders</sub></td>
+</tr>
+</table>
+
+<sub>Your memory lives in the SecondBrain app - your assistants read and write the same notes.</sub>
+
+</div>
 
 ---
 
@@ -37,8 +58,8 @@ Everything runs **server-side** in your own SecondBrain. Your memories are ordin
 
 You need two things:
 
-1. **The SecondBrain app with a Pro subscription.** The shared memory is a **Pro** feature. Get the app and upgrade to Pro inside it — [secondbrain.icu](https://secondbrain.icu). (Pro can only be enabled in the app.)
-2. **Node.js 18 or newer**, which gives you the `npm` and `npx` commands. If you don't have it yet, see [Step 1](#step-1--install-nodejs-gives-you-npm--npx) below — it takes 2 minutes on Windows, macOS, or Linux.
+1. **The SecondBrain app with a Pro subscription.** The shared memory is a **Pro** feature. Get the app and upgrade to Pro inside it - [secondbrain.icu](https://secondbrain.icu). (Pro can only be enabled in the app.)
+2. **Node.js 18 or newer**, which gives you the `npm` and `npx` commands. If you don't have it yet, see [Step 1](#step-1-install-nodejs) below - it takes 2 minutes on Windows, macOS, or Linux.
 
 That's it. You do **not** need to copy any tokens, edit JSON by hand, or be technical. The connect command does the work.
 
@@ -54,29 +75,33 @@ npx secondbrain-connect
 
 This single command will:
 
-1. Open your browser to **sign in** (Google or Apple) — no password, no token to copy.
+1. Open your browser to **sign in** (Google or Apple) - no password, no token to copy.
 2. Create a **revocable access token** tied to your account.
 3. **Auto-configure** every assistant it finds on your machine (Claude Code, Claude Desktop, Cursor).
 4. **Install the memory skill** so Claude knows *when* to use the memory.
 
-Then **fully quit and reopen** your assistant (quit, don't just close the window). Done — your assistant now has memory.
+<div align="center">
+<img src="assets/screenshots/terminal.png" width="640" alt="npx secondbrain-connect output: signs you in, configures Claude Code, Claude Desktop and Cursor, installs the skill">
+</div>
+
+Then **fully quit and reopen** your assistant (quit, don't just close the window). Done - your assistant now has memory.
 
 > Try it: ask your assistant *"What do you remember about me?"* or tell it *"Remember that I prefer tabs over spaces"*, then ask again in a new chat.
 
-If you don't have `npx` yet, do [Step 1](#step-1--install-nodejs-gives-you-npm--npx) first. For a specific app, jump to [Connect your app](#-connect-your-app).
+If you don't have `npx` yet, do [Step 1](#step-1-install-nodejs) first. For a specific app, jump to [Connect your app](#-connect-your-app).
 
 ---
 
-## Step 1 — Install Node.js (gives you `npm` + `npx`)
+## Step 1: Install Node.js
 
 `npx` ships with Node.js. Installing Node.js once gives you everything. Pick your OS.
 
-> **Check first:** you may already have it. Run `node -v` in a terminal. If it prints `v18.x` or higher, skip to [Step 2](#step-2--connect).
+> **Check first:** you may already have it. Run `node -v` in a terminal. If it prints `v18.x` or higher, skip to [Step 2](#step-2-connect).
 
 <details open>
 <summary><b>🪟 Windows</b></summary>
 
-**Easiest — official installer:**
+**Easiest - official installer:**
 1. Go to **<https://nodejs.org/en/download>** and download the **Windows Installer (.msi)**, **LTS** version.
 2. Run it and click **Next** through the wizard (defaults are fine).
 3. Open a new **PowerShell** or **Command Prompt** and verify:
@@ -96,7 +121,7 @@ winget install OpenJS.NodeJS.LTS
 <details open>
 <summary><b>🍎 macOS</b></summary>
 
-**Easiest — official installer:**
+**Easiest - official installer:**
 1. Go to **<https://nodejs.org/en/download>** and download the **macOS Installer (.pkg)**, **LTS** version.
 2. Open it and click through the installer.
 3. Open **Terminal** and verify:
@@ -116,7 +141,7 @@ brew install node
 <details open>
 <summary><b>🐧 Linux</b></summary>
 
-**Recommended — nvm (works on every distro, no sudo, easy to update):**
+**Recommended - nvm (works on every distro, no sudo, easy to update):**
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 # close and reopen your terminal, then:
@@ -140,11 +165,11 @@ For the latest version on Debian/Ubuntu, use **NodeSource**: <https://github.com
 
 </details>
 
-> **Why Node?** `npx` is a tool bundled with `npm`, and `npm` ships with Node.js. There's nothing extra to install — once `node -v` works, `npx` works. Full walkthrough: [docs/install-node.md](docs/install-node.md).
+> **Why Node?** `npx` is a tool bundled with `npm`, and `npm` ships with Node.js. There's nothing extra to install - once `node -v` works, `npx` works. Full walkthrough: [docs/install-node.md](docs/install-node.md).
 
 ---
 
-## Step 2 — Connect
+## Step 2: Connect
 
 In your terminal:
 
@@ -152,17 +177,22 @@ In your terminal:
 npx secondbrain-connect
 ```
 
-- The first time, npx asks to install the package — press **Enter** to accept.
+- The first time, npx asks to install the package - press **Enter** to accept.
 - Choose **Google** (recommended) or **Apple** when prompted, then complete the sign-in in your browser.
 - When you see **"Done. Your assistant can now use SecondBrain memory."**, the setup is complete.
+
+<div align="center">
+<img src="assets/screenshots/connect-signin.png" width="300" alt="SecondBrain sign-in page: Continue with Apple or Google">
+<br><sub>The sign-in page that opens in your browser.</sub>
+</div>
 
 > 💡 Not Pro yet? The command will tell you and give you an upgrade link. Upgrade in the SecondBrain app, then run it again.
 
 ---
 
-## Step 3 — Restart & verify
+## Step 3: Restart and verify
 
-1. **Fully quit** your assistant (Claude Desktop, Cursor, etc.) — *quit the app, not just the window* — and reopen it. (For Claude Code in a terminal, just start a new session.)
+1. **Fully quit** your assistant (Claude Desktop, Cursor, etc.) - *quit the app, not just the window* - and reopen it. (For Claude Code in a terminal, just start a new session.)
 2. Ask it something that uses memory:
    - *"Save a note: my favorite color is teal."*
    - Open a new chat: *"What's my favorite color?"*
@@ -225,7 +255,7 @@ Then **fully quit and reopen** Claude Desktop.
 
 **Automatic:** writes `~/.cursor/mcp.json`.
 
-**Manual** — `~/.cursor/mcp.json`:
+**Manual** - `~/.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
@@ -256,13 +286,13 @@ npx -y mcp-remote https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp \
 
 👉 Per-client recipes: [docs/other-clients.md](docs/other-clients.md)
 
-> **Where's `YOUR_TOKEN`?** See [How to get your token](docs/manual-setup.md#how-to-get-your-token) — the easiest way is `npx secondbrain-connect --project` in an empty folder, which writes a `.mcp.json` containing it.
+> **Where's `YOUR_TOKEN`?** See [How to get your token](docs/manual-setup.md#how-to-get-your-token) - the easiest way is `npx secondbrain-connect --project` in an empty folder, which writes a `.mcp.json` containing it.
 
 ---
 
 ## 🧠 The memory skill (for Claude)
 
-The connect command also installs a small **skill** that teaches Claude *when* to recall and save — at the start of a task, when a decision or fix is reached, when you state a lasting preference, or when you reference something from a past session.
+The connect command also installs a small **skill** that teaches Claude *when* to recall and save - at the start of a task, when a decision or fix is reached, when you state a lasting preference, or when you reference something from a past session.
 
 - **Auto-installed to:** `~/.claude/skills/secondbrain-memory/SKILL.md`
 - **Manual install:** copy [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) from this repo into that folder.
@@ -272,7 +302,7 @@ The connect command also installs a small **skill** that teaches Claude *when* t
 | Windows | `%USERPROFILE%\.claude\skills\secondbrain-memory\` |
 | macOS / Linux | `~/.claude/skills/secondbrain-memory/` |
 
-The skill is optional but recommended — it makes memory feel automatic instead of something you have to ask for.
+The skill is optional but recommended - it makes memory feel automatic instead of something you have to ask for.
 
 ---
 
@@ -295,7 +325,7 @@ npx secondbrain-connect logout          # remove local credentials on this machi
 | `--label <text>` | A label for the token (shows up in `status`). |
 | `--port <n>` | Loopback port for sign-in (default: `8788`). |
 
-**Multiple assistants or devices?** Run `npx secondbrain-connect` on each one. Every connection mints its own revocable token, but they all point to the **same memory** — so your laptop's Claude and your desktop's Cursor share everything.
+**Multiple assistants or devices?** Run `npx secondbrain-connect` on each one. Every connection mints its own revocable token, but they all point to the **same memory** - so your laptop's Claude and your desktop's Cursor share everything.
 
 ---
 
@@ -321,7 +351,7 @@ npx secondbrain-connect logout          # remove local credentials on this machi
 
 ## 🔒 Privacy & security
 
-- **Your data, your notes.** Memories are saved into your own SecondBrain folders — nothing lives in a separate silo. You see and edit everything in the app.
+- **Your data, your notes.** Memories are saved into your own SecondBrain folders - nothing lives in a separate silo. You see and edit everything in the app.
 - **Revocable tokens.** The CLI mints an opaque token (`sbm_…`) stored only as a hash on the server, scoped **only** to the memory tools, and revocable any time with `revoke`.
 - **No passwords shared.** Sign-in uses Apple/Google directly; the CLI never sees your password and only writes local MCP config files.
 - **Pro re-checked every call.** Access follows your subscription.
@@ -334,13 +364,13 @@ npx secondbrain-connect logout          # remove local credentials on this machi
 <details>
 <summary><b>"command not found: npx" / "node is not recognized"</b></summary>
 
-Node.js isn't installed or your terminal predates the install. Do [Step 1](#step-1--install-nodejs-gives-you-npm--npx), then **open a new terminal** and run `node -v`.
+Node.js isn't installed or your terminal predates the install. Do [Step 1](#step-1-install-nodejs), then **open a new terminal** and run `node -v`.
 </details>
 
 <details>
 <summary><b>The browser sign-in didn't open</b></summary>
 
-The terminal prints a URL — copy it into your browser manually. If the page can't reach the loopback port, run `npx secondbrain-connect --port 8799` (any free port).
+The terminal prints a URL - copy it into your browser manually. If the page can't reach the loopback port, run `npx secondbrain-connect --port 8799` (any free port).
 </details>
 
 <details>
@@ -379,7 +409,7 @@ Use **Google** instead: `npx secondbrain-connect --google`. It connects the same
 
 **Does my data leave SecondBrain?** No. Memories are your own notes in your account. Only the assistant you connect can read/write them, using your revocable token.
 
-**Can I use it on more than one computer?** Yes — run `npx secondbrain-connect` on each. They share one memory.
+**Can I use it on more than one computer?** Yes - run `npx secondbrain-connect` on each. They share one memory.
 
 **Do I have to use the terminal forever?** No. You run it once to connect. After that, memory just works inside your assistant.
 
@@ -388,7 +418,8 @@ Use **Google** instead: `npx secondbrain-connect --google`. It connects the same
 ## 📁 What's in this repo
 
 ```
-README.md                          this guide
+README.md                          this guide (English)
+README.it.md                       questa guida (Italiano)
 skill/secondbrain-memory/SKILL.md  the Claude memory skill (ready to install)
 docs/install-node.md               install Node/npm/npx (Windows · macOS · Linux)
 docs/claude-code.md                full Claude Code guide

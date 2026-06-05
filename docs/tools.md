@@ -1,8 +1,8 @@
 # The memory tools
 
-Once connected, your assistant gets these tools from the `secondbrain` MCP server. You rarely call them by name — the assistant (guided by the [skill](../skill/secondbrain-memory/SKILL.md)) decides when to use them. They're listed here so you know what's possible.
+Once connected, your assistant gets these tools from the `secondbrain` MCP server. You rarely call them by name - the assistant (guided by the [skill](../skill/secondbrain-memory/SKILL.md)) decides when to use them. They're listed here so you know what's possible.
 
-All actions are **scoped to your account** and write into **your own** SecondBrain notes and folders — the same ones you see in the app.
+All actions are **scoped to your account** and write into **your own** SecondBrain notes and folders - the same ones you see in the app.
 
 ## Memory
 
@@ -10,11 +10,11 @@ All actions are **scoped to your account** and write into **your own** SecondBra
 |------|--------------|
 | **`memory_search`** | Keyword search across your whole SecondBrain. Optionally scope to a folder. Omit the query to get your most recent notes. |
 | **`memory_get`** | Read the full markdown of one note by id. |
-| **`memory_list`** | Browse your folder tree and recent entries — used before saving so notes land in the right existing folder. |
+| **`memory_list`** | Browse your folder tree and recent entries - used before saving so notes land in the right existing folder. |
 | **`memory_save`** | Create a note (title, content, summary) in a folder of your tree. Can link related notes at save time. |
 | **`memory_update`** | Edit an existing note in place (title / content / summary). |
 | **`memory_link`** | Connect notes with tappable `secondbrain://note/{id}` cross-links (bidirectional, across folders). |
-| **`memory_delete`** | Delete a note — only after you confirm. |
+| **`memory_delete`** | Delete a note - only after you confirm. |
 
 ## Calendar & reminders
 
@@ -37,7 +37,7 @@ These show up in the **SecondBrain app** alongside your notes.
 ## How memory stays organized
 
 - Notes are saved into **your existing folder tree** (the assistant reuses fitting folders rather than dumping everything in one place).
-- Folders use a dot path, e.g. `root.work.projects` — created automatically if missing.
+- Folders use a dot path, e.g. `root.work.projects` - created automatically if missing.
 - Related notes get **linked** so your knowledge is a graph, not a pile.
 - Everything is editable in the app, and shared across every assistant you connect.
 
