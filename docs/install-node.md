@@ -2,7 +2,7 @@
 
 `npx secondbrain-connect` needs **Node.js 18 or newer**. Node ships with `npm` and `npx`, so installing Node is all you need.
 
-> **Already have it?** Open a terminal and run `node -v`. If it prints `v18.x` or higher, you're done - go [connect](../README.md#step-2-connect).
+> **Already have it?** Open a terminal and run `node -v`. If it prints `v18.x` or higher, you're done - go [connect](../README.md#step-2-run-the-connect-command).
 
 ---
 
@@ -97,7 +97,7 @@ npm -v
 npx -v
 ```
 
-All three printing a version = you're ready. Next: [Step 2 - Connect](../README.md#step-2-connect).
+All three printing a version = you're ready. Next: [Step 2 - Connect](../README.md#step-2-run-the-connect-command).
 
 ---
 
