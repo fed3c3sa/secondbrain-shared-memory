@@ -42,6 +42,25 @@ Normally, your AI starts from zero in every new conversation. You explain who yo
 
 ---
 
+## The SecondBrain app
+
+SecondBrain is your personal memory app for iPhone and Android. Just talk or type: it turns what you say into clean notes, files them into the right folders on its own, and keeps everything searchable in one place. The shared memory your AI assistants use is built on these same notes, so what you capture in the app and what your assistant saves live together.
+
+Get the app: **[Google Play](https://play.google.com/store/apps/details?id=app.secondbrain.android)** · iPhone and more at **[secondbrain.icu](https://secondbrain.icu)**.
+
+---
+
+## Reminders and calendar
+
+Your assistant is not limited to remembering facts. Ask it to remind you about something, or to add an event, and it shows up right in the SecondBrain app, next to your notes. For example:
+
+- *"Remind me to call the dentist tomorrow at 10."*
+- *"Put a lunch with Anna on Friday at 1pm."*
+
+Your reminders and your calendar stay with your memory, in one calm place.
+
+---
+
 ## What you need
 
 1. **The SecondBrain app, with Pro.** The memory is a Pro feature. Get the app and turn on Pro inside it: [secondbrain.icu](https://secondbrain.icu).
