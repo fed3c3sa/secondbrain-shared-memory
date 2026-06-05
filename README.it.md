@@ -124,9 +124,10 @@ La skill insegna al tuo assistente *quando* ricordare e richiamare, così la mem
   ```
 - Poi avvia una nuova sessione.
 
-**Claude Desktop:** salva il file [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) qui, poi chiudi e riapri l'app:
-- Mac: `~/.claude/skills/secondbrain-memory/SKILL.md`
-- Windows: `%USERPROFILE%\.claude\skills\secondbrain-memory\SKILL.md`
+**Claude Desktop:** carica lo zip già pronto.
+1. Scarica **[secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip)**.
+2. In Claude Desktop apri **Impostazioni → Capabilities → Skills** (attiva le Skills se te lo chiede).
+3. **Carica** lo zip appena scaricato, attivalo, e hai finito.
 
 **Cursor, Codex e altre app:** non devi installare niente. La skill è una funzione di Claude, e in queste app la memoria funziona già una volta che ti sei collegato.
 
