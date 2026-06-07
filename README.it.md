@@ -112,6 +112,25 @@ Si apre il browser. **Accedi con Google o Apple.** Questa è tutta l'installazio
 
 ---
 
+## Oppure installalo come plugin di Claude (un clic)
+
+Se usi **Claude Code**, **Cowork** o **claude.ai/code**, installa il plugin — aggiunge la **connessione** alla memoria, la **skill** e la **memoria automatica** (Claude usa SecondBrain come memoria principale):
+
+```text
+/plugin marketplace add fed3c3sa/secondbrain-shared-memory
+/plugin install secondbrain@secondbrain
+```
+
+Poi lancia `/reload-plugins` (o riavvia). La prima volta che Claude usa la memoria, il client ti chiede un **accesso una tantum dal browser** (Apple/Google) — nessun token da incollare — e funziona allo stesso modo in Claude Code, Cowork e claude.ai. La memoria richiede **Pro**.
+
+Preferisci cliccare? Lancia `/plugin`, apri **Marketplaces**, aggiungi `fed3c3sa/secondbrain-shared-memory`, poi vai su **Discover** e installa **SecondBrain Memory**.
+
+Niente marketplace? Trovi un archivio pronto in [`dist/secondbrain-plugin.zip`](dist/secondbrain-plugin.zip) — caricalo con `claude --plugin-dir dist/secondbrain-plugin.zip`.
+
+> Il plugin include tutto — connessione, skill e comportamento di memoria automatica. L'accesso è OAuth dal browser e funziona su Cowork e claude.ai esattamente come in locale. Dettagli per ogni app (incl. Claude Desktop): **[docs/plugin.md](docs/plugin.md)** (in inglese).
+
+---
+
 ## Installa la skill
 
 La skill insegna al tuo assistente *quando* ricordare e richiamare, così la memoria diventa automatica. Ogni strumento tiene le skill in una sua cartella, quindi scegli il tuo qui sotto. (Per Claude la installa già `npx secondbrain-connect`.)
@@ -142,9 +161,37 @@ mkdir -p ~/.agents/skills/secondbrain-memory && curl -fsSL https://raw.githubuse
 
 ---
 
+## Installa solo il server MCP
+
+La memoria vive dietro un unico **server MCP** remoto che ti fa accedere con un **login dal browser (OAuth)** — nessun token da incollare. Aggiungilo a qualsiasi client che supporti gli MCP remoti, poi conferma l'accesso a SecondBrain quando richiesto.
+
+**Endpoint:** `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` · **transport:** `http`
+
+**Claude Code** — un comando, poi completa l'accesso che ti chiede:
+
+```bash
+claude mcp add --transport http secondbrain https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp
+```
+
+**Cursor / altre app con MCP HTTP** — aggiungi alla configurazione MCP dell'app:
+
+```json
+{ "mcpServers": { "secondbrain": { "type": "http", "url": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp" } } }
+```
+
+**Claude Desktop** — aggiungilo come **Connector** (Impostazioni → Connectors → MCP remoto), oppure col bridge `mcp-remote`:
+
+```json
+{ "mcpServers": { "secondbrain": { "command": "npx", "args": ["-y", "mcp-remote", "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp"] } } }
+```
+
+Riavvia l'app dopo la modifica, poi accedi quando richiesto. Preferisci un solo comando che fa tutto? `npx secondbrain-connect`.
+
+---
+
 ## Funziona con
 
-Claude (Desktop e Code), Cursor e altre app di AI. Il comando configura da solo tutto quello che trova sul tuo computer. Hai un nuovo dispositivo? Lancia il comando anche lì: la memoria è la stessa ovunque.
+Claude (Desktop, Code, Cowork, claude.ai/code), Cursor e altre app di AI. Il comando configura da solo tutto quello che trova sul tuo computer; in Claude Code, Cowork e claude.ai/code puoi anche installare con un clic il [plugin](secondbrain/README.md). Hai un nuovo dispositivo? Lancia il comando anche lì: la memoria è la stessa ovunque.
 
 ---
 

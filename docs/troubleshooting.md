@@ -40,6 +40,10 @@ npx secondbrain-connect revoke --all   # disconnect everything
 npx secondbrain-connect                # connect again
 ```
 
+## I installed it as a Claude plugin
+
+See the plugin guide's troubleshooting table: [docs/plugin.md](plugin.md#troubleshooting). Quick hits: run `/reload-plugins` after installing, check the `/plugin` **Errors** tab, and if tools say `not_authenticated`, sign in with `npx secondbrain-connect` and restart.
+
 ---
 
 Still stuck? Visit [secondbrain.icu](https://secondbrain.icu).

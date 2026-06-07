@@ -1,13 +1,14 @@
 ---
 name: secondbrain-memory
 description: >-
-  Persists and recalls durable knowledge across sessions using SecondBrain
-  (a personal memory backed by the user's own notes). Use when starting a
-  coding task, when a fix or decision is reached, when project/stack facts,
-  commands, or gotchas come up, when the user states a lasting preference or
-  fact, or when they reference something from a past session ("the project",
-  "that bug", "like last time"). Connect related memories across folders by
-  default. Requires the SecondBrain MCP server (Pro).
+  SecondBrain is the assistant's main persistent memory — use it automatically.
+  Recall at the start of any task and whenever the user refers to anything prior
+  ("the project", "that bug", "my preference", "like last time"). Save, without
+  being asked, anything durable and reusable: decisions and why, solved problems
+  and fixes, stable preferences, project/stack facts, people, plans, useful
+  repos/URLs. Also put time-bound things on the calendar/reminders. Connect
+  related notes across folders by default. Backed by the user's own notes via the
+  SecondBrain MCP (Pro).
 allowed-tools:
   - secondbrain:memory_search
   - secondbrain:memory_get
@@ -23,26 +24,34 @@ allowed-tools:
 
 # SecondBrain memory
 
-SecondBrain is the user's persistent memory. Use it so you never start from zero
-across sessions, and so durable knowledge outlives any single conversation. The
-tools are provided by the `secondbrain` MCP server; always call them
-fully-qualified (`secondbrain:memory_save`, etc.).
+SecondBrain is the user's persistent memory and **this assistant's primary
+long-term memory** — use it so you never start from zero across sessions, and so
+durable knowledge outlives any single conversation. The tools are provided by the
+`secondbrain` MCP server; always call them fully-qualified
+(`secondbrain:memory_save`, etc.).
 
-## If you are not signed in
+Use memory **proactively and automatically** — recalling and saving are part of
+the normal flow of every task, not something to wait for the user to request.
 
-If any tool returns `status: "not_authenticated"`, sign the user in before
-continuing, then retry the original action. Never abandon the task on this error.
+## Signing in (automatic — the user just logs in)
 
-- Easiest: tell the user to run `npx secondbrain-connect` in a terminal. One
-  Apple/Google login configures this assistant (and any others) automatically,
-  with no tokens to copy. If you can run shell commands, run it for them. Then
-  fully restart the app and retry.
-- Only if a terminal isn't available, call `secondbrain:secondbrain_login` with no
-  arguments, share the link with the user, wait, then call it again with the
-  returned `device_code` to finish.
+The official helper `npx secondbrain-connect` signs the user in (Apple/Google) and
+**writes the access token straight into the app's config** — nothing to copy or
+paste. If any tool returns `status: "not_authenticated"`, get the user connected,
+then retry. Never abandon the task on this error.
 
-If sign-in reports `pro_required`, tell the user the memory is a Pro feature and
-they should open the SecondBrain app and upgrade to Pro (that is the only way to
+Run `npx secondbrain-connect` yourself, right away — don't make the user type it. It
+opens their browser for a one-time sign-in and configures this assistant (and every
+other on the machine). Tell the user briefly: *"Opening your browser to sign in to
+SecondBrain."* If `npx`/Node isn't installed the command fails — give them the
+complete installer guide (Windows · macOS · Linux):
+<https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>,
+then run `npx secondbrain-connect` again. When it finishes, have the user fully
+restart the app (or reconnect the MCP servers) once, then retry.
+
+Never print the user's access token in the chat — `secondbrain-connect` handles the
+token for you. If sign-in reports `pro_required`, tell the user the memory is a Pro
+feature and they should open the SecondBrain app and upgrade to Pro (the only way to
 go Pro). Pass along the `upgrade_url`.
 
 ## Recall (read first)
@@ -59,7 +68,7 @@ Prefer recalling over asking the user to repeat themselves.
 
 ## Remember (write)
 
-When something durable and reusable is established, save it.
+When something durable and reusable is established, save it — without being asked.
 
 - **Coding sessions:** a solved problem plus the working fix; an architectural
   decision and *why*; project/stack facts; build / run / test commands;
@@ -108,7 +117,10 @@ in the SecondBrain app):
 - `secondbrain:calendar_create_event` for things with a start AND end (meeting, call,
   flight, class, appointment).
 - `secondbrain:reminder_create` for single-time nudges ("remind me to ...").
-- `secondbrain:calendar_search` to check the schedule or avoid duplicates first.
+- `secondbrain:calendar_search` to check the schedule or avoid duplicates first. When
+  the user asks what's on / what they have / what to remember for a day or period, you
+  MUST call it over that range (kind left unset so events and reminders both come back)
+  before answering — never answer "nothing" from memory.
 
 Use ISO 8601 with the user's timezone offset (e.g. `2026-06-10T15:00:00+02:00`), never
 UTC unless they're in UTC. Never invent a date/time. If it's vague, ask. Link to the

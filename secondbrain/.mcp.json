@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "secondbrain": {
+      "type": "http",
+      "url": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp"
+    }
+  }
+}

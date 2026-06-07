@@ -10,3 +10,7 @@ Thumbs.db
 credentials.json
 .mcp.json
 **/.mcp.json
+
+# ...but DO ship the plugin's MCP config — it is token-less (no secrets). It
+# points at the SecondBrain MCP endpoint; sign-in is browser OAuth at runtime.
+!secondbrain/.mcp.json

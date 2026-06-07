@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "secondbrain",
+  "displayName": "SecondBrain Memory",
+  "version": "0.3.0",
+  "description": "Make SecondBrain Claude's automatic long-term memory: a skill that recalls at the start of a task and saves durable facts, decisions, preferences, people, and events on its own, plus an auto-memory primer and the SecondBrain connection. Sign-in is a one-time browser login (OAuth, Apple/Google) — no token to paste — and works in Claude Code, Cowork, and claude.ai. Backed by your own private notes (Pro).",
+  "author": {
+    "name": "SecondBrain",
+    "url": "https://secondbrain.icu"
+  },
+  "homepage": "https://secondbrain.icu",
+  "repository": "https://github.com/fed3c3sa/secondbrain-shared-memory",
+  "license": "Proprietary",
+  "keywords": [
+    "memory",
+    "secondbrain",
+    "persistent-memory",
+    "recall",
+    "notes",
+    "calendar",
+    "reminders",
+    "knowledge"
+  ],
+  "skills": "./skills/"
+}
