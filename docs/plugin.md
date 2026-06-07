@@ -104,23 +104,34 @@ For a permanent install, prefer the marketplace path at the top.
 
 ## Sign in (one browser login — no token to paste)
 
-The bundled connection is token-less; the SecondBrain MCP endpoint speaks **OAuth 2.1**.
-The first time Claude uses memory and you're not signed in, your client prompts you to
-sign in:
+The connection is token-less; the SecondBrain MCP endpoint speaks **OAuth 2.1**. You sign
+in **once in the browser** (Apple/Google) and your client stores + refreshes the token
+itself — nothing to paste, and it stays connected. Where you trigger that one login
+depends on the surface:
 
-1. Approve the SecondBrain sign-in / connector when your client offers it.
-2. A browser opens — log in with **Apple or Google** (the same account as the SecondBrain
-   app).
-3. Done. Your client stores the credential and refreshes it automatically. Nothing to
-   copy or paste.
+**Cowork / claude.ai (web).** There is no `/mcp` command here, and don't use
+`npx secondbrain-connect` (its loopback redirect can't be reached from a cloud session).
+Go to **Customize → Connectors** (Team/Enterprise: **Organization settings →
+Connectors**):
 
-This works the same in **Claude Code, Cowork, and claude.ai** — the OAuth server
-([implemented here](cowork-oauth-plan.md)) handles dynamic client registration and the
-browser flow, so cloud hosts sign in exactly like local ones. Memory requires **Pro**.
+1. If **SecondBrain** is listed (from the plugin), press **Connect**. Otherwise press
+   **"+" → Add custom connector** and enter the URL
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, then **Add**.
+2. Press **Connect** → a browser opens → log in with **Apple/Google** → done.
 
-- **Fallback** (a client without MCP browser sign-in, e.g. some terminal setups): run
-  `npx secondbrain-connect` — it opens the browser and stores a token in your app config.
-  No Node / `npx`? See the **[Node installer guide](install-node.md)**.
+> On the web, only the Connectors **Connect** button can store the token — the assistant
+> can't paste a durable sign-in link into a web session. It's still one login, then it
+> persists.
+
+**Claude Code (terminal).** Run **`/mcp`**, select `secondbrain`, and complete the
+browser sign-in. (No-browser fallback: `npx secondbrain-connect`; no Node? see the
+**[Node installer guide](install-node.md)**.)
+
+**Claude Desktop (app).** **Settings → Connectors** → SecondBrain → **Connect** → log in.
+
+The OAuth server ([implemented here](cowork-oauth-plan.md)) handles dynamic client
+registration and the browser flow, so every surface signs in the same way. Memory
+requires **Pro**.
 
 > **Why a browser login at all?** The memory is your private account, so the connection
 > needs your authorization. OAuth does that in the browser and hands your client a token

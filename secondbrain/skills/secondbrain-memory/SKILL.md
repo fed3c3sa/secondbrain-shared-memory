@@ -28,28 +28,30 @@ the normal flow of every task, not something to wait for the user to request.
 
 ## Signing in (one browser login — no token to paste)
 
-This plugin bundles the SecondBrain connection. The first time memory is used and the
-user isn't signed in, their client prompts for a **one-time browser sign-in** (OAuth,
-Apple/Google). The client stores the credential itself and refreshes it automatically —
-there is nothing to copy or paste. This works in **Claude Code, Cowork, and claude.ai**.
-Memory requires **Pro**.
+SecondBrain authenticates with a **one-time browser sign-in** (OAuth, Apple/Google). The
+client stores and refreshes the credential itself — nothing to copy or paste. Memory
+requires **Pro**. Completing the sign-in is a **user UI action** — you cannot start it
+programmatically, so tell the user exactly where to click, by surface:
 
-If a SecondBrain tool reports it needs authentication (or the client surfaces a
-`secondbrain` "authenticate" step):
+- **Cowork / claude.ai (web):** there is **no `/mcp` command** here, and **do not** run
+  `npx secondbrain-connect` (its sign-in redirects to a local-loopback address that a
+  cloud session can't reach). The connection is a **Connector**. Tell the user:
+  *Customize → Connectors* (Team/Enterprise: *Organization settings → Connectors*) →
+  if **SecondBrain** is listed, press **Connect**; otherwise press **"+" → Add custom
+  connector**, enter the URL
+  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, **Add**, then **Connect**.
+  A browser opens → log in with Apple/Google → done. Then retry.
+- **Claude Code (terminal):** run `/mcp`, select `secondbrain`, and complete the browser
+  sign-in (or approve the authenticate prompt). If the client can't open a browser, you
+  may instead run `npx secondbrain-connect` yourself (it opens the browser and stores the
+  token); if `npx`/Node is missing, give the user the installer guide (Windows · macOS ·
+  Linux): <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>.
+- **Claude Desktop (app):** *Settings → Connectors* → add/connect SecondBrain (same URL),
+  or run `npx secondbrain-connect`.
 
-- **Claude Code / Cowork / claude.ai:** tell the user to complete the SecondBrain
-  browser sign-in when prompted (approve the connector / run the `authenticate` step the
-  client offers). It opens a browser; they log in with Apple/Google; done — durably. Then
-  retry the original action.
-- **A client/terminal without MCP browser sign-in:** as a fallback, run
-  `npx secondbrain-connect` yourself — it opens the browser and stores the token. If
-  `npx`/Node isn't installed, give the user the installer guide (Windows · macOS · Linux):
-  <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>,
-  then run it again; restart once, then retry.
-
-Never abandon the task on an auth error. If sign-in reports `pro_required`, the memory is
-a Pro feature — have the user open the SecondBrain app and upgrade (the only place to do
-it); pass along the `upgrade_url`.
+Never abandon the task on an auth error, and never paste or print a token. If sign-in
+reports `pro_required`, the memory is a Pro feature — have the user open the SecondBrain
+app and upgrade (the only place to do it); pass along the `upgrade_url`.
 
 ## Recall (read first)
 
