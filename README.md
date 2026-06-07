@@ -7,9 +7,9 @@
 
 # SecondBrain: one memory for all your AI
 
-**Your AI assistants forget everything the moment you close the chat. SecondBrain gives them a memory.**
+**Your AI forgets everything the moment you close the chat. SecondBrain gives it a memory.**
 
-Tell something once, and every assistant you use remembers it, in the next chat and next month.
+Tell it something once — every assistant you use remembers it, in the next chat and next month.
 
 [🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrain.icu](https://secondbrain.icu)
 
@@ -23,9 +23,9 @@ Tell something once, and every assistant you use remembers it, in the next chat 
 
 ## What is it?
 
-Normally, your AI starts from zero in every new conversation. You explain who you are, what you are working on, your preferences, again and again.
+Normally your AI starts from zero every conversation — you re-explain who you are, what you're working on, your preferences, again and again.
 
-**SecondBrain is a shared memory for your assistants.** You tell it something once, and it stays: your assistant remembers it tomorrow, next week, and even if you switch to a different AI app. The memory is simply your own notes in the SecondBrain app, so it is private, it is yours, and you can read or edit it any time from your phone.
+**SecondBrain is a shared memory for your assistants.** Tell it once and it stays: your assistant remembers tomorrow, next week, and even if you switch to a different AI app. The memory is simply your own notes in the SecondBrain app — private, yours, readable and editable any time from your phone.
 
 <div align="center">
 
@@ -40,165 +40,50 @@ Normally, your AI starts from zero in every new conversation. You explain who yo
 
 </div>
 
----
+It also handles **reminders and calendar**: ask *"remind me to call the dentist tomorrow at 10"* and it shows up in the app, next to your notes.
 
-## The SecondBrain app
-
-SecondBrain is your personal memory app for iPhone and Android. Just talk or type: it turns what you say into clean notes, files them into the right folders on its own, and keeps everything searchable in one place. The shared memory your AI assistants use is built on these same notes, so what you capture in the app and what your assistant saves live together.
-
-Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** · **[Google Play (Android)](https://play.google.com/store/apps/details?id=app.secondbrain.android)**.
+Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** · **[Google Play (Android)](https://play.google.com/store/apps/details?id=app.secondbrain.android)**
 
 ---
 
-## Reminders and calendar
+## Connect your AI — one login
 
-Your assistant is not limited to remembering facts. Ask it to remind you about something, or to add an event, and it shows up right in the SecondBrain app, next to your notes. For example:
+1. **Get the app and turn on Pro** — at [secondbrain.icu](https://secondbrain.icu). The memory is a Pro feature.
+2. **Connect your assistant** (below). You sign in **once in your browser** with Apple/Google — after that your AI remembers, everywhere, for good.
 
-- *"Remind me to call the dentist tomorrow at 10."*
-- *"Put a lunch with Anna on Friday at 1pm."*
+### Using Claude? Install the plugin
 
-Your reminders and your calendar stay with your memory, in one calm place.
-
----
-
-## What you need
-
-1. **The SecondBrain app, with Pro.** The memory is a Pro feature. Get the app and turn on Pro inside it: [secondbrain.icu](https://secondbrain.icu).
-2. **A computer** (Windows, Mac, or Linux) to run one short command, once.
-
-That is all. No accounts to wire up, no settings to copy. The setup below does everything for you.
-
----
-
-## Setup in 3 steps
-
-### Step 1: Install Node.js
-
-The setup uses a free tool called **Node.js**. Installing it takes about 2 minutes and you only do it once.
-
-- Go to **[nodejs.org/en/download](https://nodejs.org/en/download)**, download the **LTS** version for your system, and run the installer (click Next through it).
-- Need a hand? Follow the simple per-system guide here: **[Install Node.js](docs/install-node.md)**.
-
-> Already have it? You can skip this step. (If you are not sure, just continue, it will tell you.)
-
-### Step 2: Run the connect command
-
-Open a **terminal** on your computer:
-
-- **Windows:** press the Windows key, type **PowerShell**, press Enter.
-- **Mac:** press Cmd + Space, type **Terminal**, press Enter.
-- **Linux:** open your **Terminal** app.
-
-Type this and press Enter:
-
-```bash
-npx secondbrain-connect
-```
-
-Your browser opens. **Sign in with Google or Apple.** That is the whole setup, no passwords or codes to copy.
-
-<div align="center">
-<img src="assets/screenshots/terminal.png" width="620" alt="The connect command signs you in and sets up your assistant automatically">
-<br><br>
-<img src="assets/screenshots/connect-signin.png" width="280" alt="Sign in with Apple or Google">
-<br><sub>The sign-in page that opens in your browser.</sub>
-</div>
-
-### Step 3: Restart your AI app
-
-Fully **quit and reopen** your assistant (close the whole app, not just the window). Done.
-
-> **Try it:** tell your assistant *"Remember that my favorite color is teal."* Then open a new chat and ask *"What is my favorite color?"* If it knows, the memory works. 🎉
-
----
-
-## Or install it as a Claude plugin (one click)
-
-If you use **Claude Code**, **Cowork**, or **claude.ai/code**, install the plugin — it adds the memory **connection**, the **skill**, and **automatic memory** (Claude treats SecondBrain as its primary memory):
+In **Claude Code**, **Cowork**, or **claude.ai**:
 
 ```text
 /plugin marketplace add fed3c3sa/secondbrain-shared-memory
 /plugin install secondbrain@secondbrain
 ```
 
-Then run `/reload-plugins` (or restart). The first time Claude uses memory, your client prompts a **one-time browser sign-in** (Apple/Google) — no token to paste — and it works the same in Claude Code, Cowork, and claude.ai. Memory needs **Pro**.
+Then sign in once when prompted:
 
-Prefer clicking? Run `/plugin`, open **Marketplaces**, add `fed3c3sa/secondbrain-shared-memory`, then go to **Discover** and install **SecondBrain Memory**.
+- **Claude Code:** run `/mcp` → `secondbrain` → log in.
+- **Cowork / claude.ai:** open **Customize → Connectors → SecondBrain → Connect** → log in.
+- **Claude Desktop:** **Settings → Connectors** → add SecondBrain → **Connect** → log in.
 
-No marketplace? A ready-made archive lives at [`dist/secondbrain-plugin.zip`](dist/secondbrain-plugin.zip) — load it with `claude --plugin-dir dist/secondbrain-plugin.zip`.
+### Using anything else? One command
 
-> The plugin bundles everything — connection, skill, and the automatic-memory behavior. Sign-in is browser OAuth and works the same on Cowork and claude.ai as locally. Full per-app details (incl. Claude Desktop): **[docs/plugin.md](docs/plugin.md)**.
-
----
-
-## Install the skill
-
-The skill teaches your assistant *when* to remember and recall, so the memory feels automatic. Every tool keeps skills in its own folder, so pick yours below. (`npx secondbrain-connect` already installs it for Claude.)
-
-**Claude Code.** Just ask it: *"Install the skill from https://github.com/fed3c3sa/secondbrain-shared-memory into ~/.claude/skills."* Or run one line, then start a new session:
+For Cursor, ChatGPT, Gemini and other apps — run this once (it needs [Node.js](docs/install-node.md)), sign in in the browser, then restart the app:
 
 ```bash
-mkdir -p ~/.claude/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.claude/skills/secondbrain-memory/SKILL.md
+npx secondbrain-connect
 ```
 
-**Cursor.** Cursor also reads `~/.claude/skills/`, so the line above already covers it. To add it to one project only, drop it in `.cursor/skills/`, then reload the window (Cmd/Ctrl+Shift+P, "Developer: Reload Window"):
+It sets up every assistant on your computer and installs the memory skill automatically.
 
-```bash
-mkdir -p .cursor/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o .cursor/skills/secondbrain-memory/SKILL.md
-```
-
-**Codex.** Run one line, then check it with `/skills`:
-
-```bash
-mkdir -p ~/.agents/skills/secondbrain-memory && curl -fsSL https://raw.githubusercontent.com/fed3c3sa/secondbrain-shared-memory/main/skill/secondbrain-memory/SKILL.md -o ~/.agents/skills/secondbrain-memory/SKILL.md
-```
-
-**Claude Desktop.** Download **[secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip)**, then in the app open **Settings → Capabilities → Skills**, upload the zip, and enable it.
-
-**Any other app with skills.** Drop the same `SKILL.md` into its skills folder (most read `.agents/skills/` or `~/.agents/skills/`).
-
-> **On Windows**, use the same folders under your user home, for example `%USERPROFILE%\.claude\skills\secondbrain-memory\SKILL.md`, and save the [SKILL.md](skill/secondbrain-memory/SKILL.md) there.
-
----
-
-## Install just the MCP server
-
-The memory lives behind one remote **MCP server** that signs you in with a **browser login (OAuth)** — no token to paste. Add it to any client that supports remote MCP, then approve the SecondBrain sign-in when prompted.
-
-**Endpoint:** `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` · **transport:** `http`
-
-**Claude Code** — one command, then complete the sign-in it prompts for:
-
-```bash
-claude mcp add --transport http secondbrain https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp
-```
-
-**Cursor / other HTTP-MCP apps** — add to the app's MCP config:
-
-```json
-{ "mcpServers": { "secondbrain": { "type": "http", "url": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp" } } }
-```
-
-**Claude Desktop** — add it as a **Connector** (Settings → Connectors → custom/remote MCP), or via the `mcp-remote` bridge:
-
-```json
-{ "mcpServers": { "secondbrain": { "command": "npx", "args": ["-y", "mcp-remote", "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp"] } } }
-```
-
-Restart the app after editing, then sign in when prompted. Prefer one command that wires it up for you? `npx secondbrain-connect`.
-
----
-
-## Works with
-
-Claude (Desktop, Code, Cowork, claude.ai/code), Cursor, and other AI apps. The connect command sets up everything it finds on your computer automatically; in Claude Code, Cowork, and claude.ai/code you can also one-click the [plugin](secondbrain/README.md). Got a new device? Just run the command there too — it is the same memory everywhere.
+> **Try it:** say *"Remember my favorite color is teal."* Then, in a brand-new chat, ask *"What's my favorite color?"* If it knows, you're set. 🎉
 
 ---
 
 ## Manage it
 
 ```bash
-npx secondbrain-connect status        # see what is connected
+npx secondbrain-connect status        # see what's connected
 npx secondbrain-connect revoke --all  # disconnect everything
 ```
 
@@ -206,10 +91,10 @@ npx secondbrain-connect revoke --all  # disconnect everything
 
 ## Need help?
 
-- **It says you need Pro?** Open the SecondBrain app and turn on Pro (that is the only place to do it), then run the command again.
-- **Apple sign-in did not work?** Use Google instead: `npx secondbrain-connect --google`.
-- **`npx` not found?** Node.js is not installed yet, see [Step 1](#step-1-install-nodejs).
-- **Your assistant does not remember?** Fully quit and reopen the app.
+- **It says you need Pro?** Turn on Pro in the SecondBrain app, then try again.
+- **Sign-in didn't open?** Try `npx secondbrain-connect --google`, or copy the link it prints into your browser.
+- **`npx` not found?** Install Node.js — [guide](docs/install-node.md).
+- **Doesn't remember?** Fully quit and reopen the app (and on Claude web, make sure the SecondBrain connector shows **Connected**).
 
 More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
@@ -219,9 +104,17 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
 **Is it free?** The app is free. The shared memory is part of Pro.
 
-**Is my data private?** Yes. The memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
+**Is my data private?** Yes — the memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
 
-**Do I have to use the terminal every day?** No. You run the command once to connect. After that, the memory just works inside your assistant.
+**Do I sign in every time?** No. One browser login, then it just works.
+
+---
+
+## Advanced
+
+- **Claude plugin — full guide** (per-app sign-in, offline zip, troubleshooting): [docs/plugin.md](docs/plugin.md)
+- **Add the connection by hand** (any remote-MCP app): point it at `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` (transport `http`) and sign in in the browser when prompted.
+- **Install just the skill** (without the plugin): drop [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) into your tool's skills folder (e.g. `~/.claude/skills/`), or upload [secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip) in Claude Desktop (**Settings → Capabilities → Skills**).
 
 ---
 
