@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "secondbrain",
   "owner": {
-    "name": "SecondBrain"
+    "name": "Federico Cesarini"
   },
   "metadata": {
     "description": "SecondBrain — one persistent memory for your AI assistants."
@@ -14,7 +14,7 @@
       "description": "Make SecondBrain Claude's automatic long-term memory: a skill that recalls what matters and saves durable facts, decisions, preferences, people, and events on its own, plus an auto-memory primer and the SecondBrain connection. Sign-in is a one-time browser login (OAuth) — nothing to paste — in Claude Code, Cowork, and claude.ai. Backed by your own private notes (Pro).",
       "version": "0.3.0",
       "author": {
-        "name": "SecondBrain"
+        "name": "Federico Cesarini"
       },
       "homepage": "https://secondbrain.icu",
       "repository": "https://github.com/fed3c3sa/secondbrain-shared-memory",

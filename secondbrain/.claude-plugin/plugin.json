@@ -5,7 +5,7 @@
   "version": "0.3.0",
   "description": "Make SecondBrain Claude's automatic long-term memory: a skill that recalls at the start of a task and saves durable facts, decisions, preferences, people, and events on its own, plus an auto-memory primer and the SecondBrain connection. Sign-in is a one-time browser login (OAuth, Apple/Google) — no token to paste — and works in Claude Code, Cowork, and claude.ai. Backed by your own private notes (Pro).",
   "author": {
-    "name": "SecondBrain",
+    "name": "Federico Cesarini",
     "url": "https://secondbrain.icu"
   },
   "homepage": "https://secondbrain.icu",
