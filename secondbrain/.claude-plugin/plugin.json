@@ -10,7 +10,7 @@
   },
   "homepage": "https://secondbrain.icu",
   "repository": "https://github.com/fed3c3sa/secondbrain-shared-memory",
-  "license": "Proprietary",
+  "license": "MIT",
   "keywords": [
     "memory",
     "secondbrain",

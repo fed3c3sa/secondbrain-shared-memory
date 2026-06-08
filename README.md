@@ -7,15 +7,17 @@
 
 # SecondBrain: one memory for all your AI
 
+**The first shared memory for AI.** Claude, Claude Code, ChatGPT, Gemini, and your open-source agents all read and write *one* memory: what any of them saves, the others instantly see, and so can you, from the phone app, anywhere.
+
 **Your AI forgets everything the moment you close the chat. SecondBrain gives it a memory.**
 
-Tell it something once — every assistant you use remembers it, in the next chat and next month.
+Tell it something once, and every assistant you use remembers it, in the next chat and next month.
 
 [🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrain.icu](https://secondbrain.icu)
 
 <br>
 
-<img src="assets/how-it-works.svg" alt="Your AI assistants remember and recall through one shared SecondBrain memory" width="780">
+<img src="assets/secondbrain-flow.png" alt="Your AI assistants remember and recall through one shared SecondBrain memory" width="780">
 
 </div>
 
@@ -23,9 +25,9 @@ Tell it something once — every assistant you use remembers it, in the next cha
 
 ## What is it?
 
-Normally your AI starts from zero every conversation — you re-explain who you are, what you're working on, your preferences, again and again.
+Normally your AI starts from zero every conversation: you re-explain who you are, what you're working on, your preferences, again and again.
 
-**SecondBrain is a shared memory for your assistants.** Tell it once and it stays: your assistant remembers tomorrow, next week, and even if you switch to a different AI app. The memory is simply your own notes in the SecondBrain app — private, yours, readable and editable any time from your phone.
+**SecondBrain is a shared memory for your assistants.** Tell it once and it stays: your assistant remembers tomorrow, next week, and even if you switch to a different AI app. The memory is simply your own notes in the SecondBrain app: private, yours, readable and editable any time from your phone.
 
 <div align="center">
 
@@ -46,10 +48,10 @@ Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** �
 
 ---
 
-## Connect your AI — one login
+## Connect your AI in one login
 
-1. **Get the app and turn on Pro** — at [secondbrain.icu](https://secondbrain.icu). The memory is a Pro feature.
-2. **Connect your assistant** (below). You sign in **once in your browser** with Apple/Google — after that your AI remembers, everywhere, for good.
+1. **Get the app and turn on Pro** at [secondbrain.icu](https://secondbrain.icu). The memory is a Pro feature.
+2. **Connect your assistant** (below). You sign in **once in your browser** with Apple/Google. After that your AI remembers, everywhere, for good.
 
 ### Using Claude? Install the plugin
 
@@ -68,7 +70,7 @@ Then sign in once when prompted:
 
 ### Using anything else? One command
 
-For Cursor, ChatGPT, Gemini and other apps — run this once (it needs [Node.js](docs/install-node.md)), sign in in the browser, then restart the app:
+For Cursor, ChatGPT, Gemini and other apps, run this once (it needs [Node.js](docs/install-node.md)), sign in in the browser, then restart the app:
 
 ```bash
 npx secondbrain-connect
@@ -93,7 +95,7 @@ npx secondbrain-connect revoke --all  # disconnect everything
 
 - **It says you need Pro?** Turn on Pro in the SecondBrain app, then try again.
 - **Sign-in didn't open?** Try `npx secondbrain-connect --google`, or copy the link it prints into your browser.
-- **`npx` not found?** Install Node.js — [guide](docs/install-node.md).
+- **`npx` not found?** Install Node.js ([guide](docs/install-node.md)).
 - **Doesn't remember?** Fully quit and reopen the app (and on Claude web, make sure the SecondBrain connector shows **Connected**).
 
 More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
@@ -104,7 +106,7 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
 **Is it free?** The app is free. The shared memory is part of Pro.
 
-**Is my data private?** Yes — the memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
+**Is my data private?** Yes, the memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
 
 **Do I sign in every time?** No. One browser login, then it just works.
 
@@ -112,7 +114,7 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
 ## Advanced
 
-- **Claude plugin — full guide** (per-app sign-in, offline zip, troubleshooting): [docs/plugin.md](docs/plugin.md)
+- **Claude plugin: full guide** (per-app sign-in, offline zip, troubleshooting): [docs/plugin.md](docs/plugin.md)
 - **Add the connection by hand** (any remote-MCP app): point it at `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` (transport `http`) and sign in in the browser when prompted.
 - **Install just the skill** (without the plugin): drop [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) into your tool's skills folder (e.g. `~/.claude/skills/`), or upload [secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip) in Claude Desktop (**Settings → Capabilities → Skills**).
 

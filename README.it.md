@@ -15,7 +15,7 @@ Diglielo una volta — ogni assistente che usi se lo ricorda, nella chat dopo e 
 
 <br>
 
-<img src="assets/how-it-works.svg" alt="I tuoi assistenti AI ricordano e richiamano grazie a un'unica memoria SecondBrain" width="780">
+<img src="assets/secondbrain-flow.png" alt="I tuoi assistenti AI ricordano e richiamano grazie a un'unica memoria SecondBrain" width="780">
 
 </div>
 

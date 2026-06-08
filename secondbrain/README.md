@@ -86,6 +86,9 @@ SecondBrain MCP endpoint URL. Authentication happens at runtime via browser OAut
 
 ## License
 
-Proprietary — see [LICENSE](LICENSE). You may use this plugin and skill to connect
-your own assistants to your own SecondBrain account. The SecondBrain name, brand,
-service, and software are proprietary.
+**MIT** — see [LICENSE](LICENSE). The plugin, skill, hooks, and configuration in this
+repository are free and open source; use, modify, and redistribute them freely.
+
+The MIT grant does **not** extend to the SecondBrain hosted service / MCP backend, the
+app, or the **SecondBrain** name and logos, which remain proprietary. Using the memory
+features requires a SecondBrain account (**Pro**).
