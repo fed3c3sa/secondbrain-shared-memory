@@ -63,18 +63,16 @@ claude plugin install secondbrain@secondbrain
 
 ### Claude Desktop (chat app)
 
-The desktop chat app doesn't use the `/plugin` marketplace, so install the two pieces the
-"desktop way":
+The desktop chat app runs the plugin too — import the prebuilt archive:
 
-1. **Skill** — download
-   [secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip),
-   then **Settings → Capabilities → Skills → Upload skill**, and enable it.
-2. **Connection** — add SecondBrain as a **Connector** (Settings → Connectors → add a
-   custom/remote MCP at `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`) and
-   sign in via the browser, or run `npx secondbrain-connect`.
+1. Download
+   [secondbrain-plugin.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip)
+   (from the [`dist/`](../dist/) folder) and **import it** in the app.
+2. Sign in once: **Settings → Connectors → SecondBrain → Connect** → log in with
+   Apple/Google (or run `npx secondbrain-connect`).
 
 Then fully quit and reopen the app. (If you drive Claude Code *inside* the desktop app,
-use the `/plugin` commands above instead.)
+the `/plugin` commands above also work.)
 
 ### From the downloadable zip (offline / no marketplace)
 
@@ -94,9 +92,8 @@ token-less `.mcp.json` (no secrets).
   claude --plugin-url https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip
   ```
 
-- **Claude Desktop (chat app):** its Skills uploader expects a *skill* zip, not a plugin
-  zip — use [`skill/secondbrain-memory.zip`](../skill/secondbrain-memory.zip) and run
-  `secondbrain-connect`.
+- **Claude Desktop (chat app):** import the same plugin zip in the app, then sign in via
+  **Settings → Connectors → SecondBrain → Connect**.
 
 For a permanent install, prefer the marketplace path at the top.
 
