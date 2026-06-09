@@ -53,18 +53,16 @@ Scarica l'app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)**
 
 ### Usi Claude? Installa il plugin
 
-In **Claude Code**, **Cowork** o **claude.ai**:
+**Claude Code** — chiedi direttamente a Claude Code di installarlo, incollando il link del repo:
 
-```text
-/plugin marketplace add fed3c3sa/secondbrain-shared-memory
-/plugin install secondbrain@secondbrain
-```
+> *Installa il plugin SecondBrain da https://github.com/fed3c3sa/secondbrain-shared-memory*
 
-Poi accedi una volta quando richiesto:
+Claude Code aggiunge il marketplace e installa il plugin per te. Poi accedi una volta: lancia `/mcp` → `secondbrain` → accedi. **Se non riesce a connettersi, lancia `npx secondbrain-connect` dal terminale** (serve [Node.js](docs/install-node.md)) e accedi dal browser.
 
-- **Claude Code:** lancia `/mcp` → `secondbrain` → accedi.
-- **Cowork / claude.ai:** apri **Customize → Connectors → SecondBrain → Connect** → accedi.
-- **Claude Desktop:** **Settings → Connectors** → aggiungi SecondBrain → **Connect** → accedi.
+**Cowork & Claude Desktop** — scarica il plugin e importalo:
+
+1. Scarica **[secondbrain-plugin.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip)** (dalla cartella [`dist/`](dist/)).
+2. Importalo nell'app, poi accedi una volta: apri **Customize / Settings → Connectors → SecondBrain → Connect** → accedi con Apple/Google.
 
 ### Usi altro? Un comando
 
