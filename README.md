@@ -50,25 +50,31 @@ Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** �
 
 ## Connect your AI in one login
 
+> ✅ Sign in with **Apple** or **Google** — both fully supported. Use the **same account you use in the SecondBrain app**, so your assistant finds your notes.
+
+Two steps, once:
+
 1. **Get the app and turn on Pro** at [secondbrain.icu](https://secondbrain.icu). The memory is a Pro feature.
-2. **Connect your assistant** (below). You sign in **once in your browser** with Apple/Google. After that your AI remembers, everywhere, for good.
+2. **Connect your assistant** — find your app below. You sign in **once in your browser**; after that your AI remembers, everywhere, for good.
 
-### Using Claude? Install the plugin
+### Using Claude Code?
 
-**Claude Code** — just ask Claude Code to install it, pasting the repo link:
+1. Ask Claude Code to install the plugin — paste this into the chat:
+   > *Install the SecondBrain plugin from https://github.com/fed3c3sa/secondbrain-shared-memory*
+2. Run `/mcp`, pick `secondbrain`, choose **Sign in** — your browser opens.
+3. Click **Continue with Apple** or **Continue with Google**. Done.
 
-> *Install the SecondBrain plugin from https://github.com/fed3c3sa/secondbrain-shared-memory*
+If it won't connect, run `npx secondbrain-connect` from your terminal (needs [Node.js](docs/install-node.md)) and sign in there instead.
 
-Claude Code adds the marketplace and installs the plugin for you. Then sign in once: run `/mcp` → `secondbrain` → log in. **If it won't connect, run `npx secondbrain-connect` from your terminal** (needs [Node.js](docs/install-node.md)) and sign in in the browser.
-
-**Cowork & Claude Desktop** — download the plugin and import it:
+### Using Cowork or Claude Desktop?
 
 1. Download **[secondbrain-plugin.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip)** (from the [`dist/`](dist/) folder).
-2. Import it in the app, then sign in once: open **Customize / Settings → Connectors → SecondBrain → Connect** → log in with Apple/Google.
+2. Import it in the app.
+3. Sign in once: **Settings → Connectors → SecondBrain → Connect** (on Cowork: **Customize → Connectors**) → log in with **Apple or Google**.
 
 ### Using anything else? One command
 
-For Cursor, ChatGPT, Gemini and other apps, run this once (it needs [Node.js](docs/install-node.md)), sign in in the browser, then restart the app:
+For Cursor, ChatGPT, Gemini and other apps, run this once (it needs [Node.js](docs/install-node.md)), sign in with Apple or Google in the browser, then restart the app:
 
 ```bash
 npx secondbrain-connect
@@ -105,6 +111,8 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 **Is it free?** The app is free. The shared memory is part of Pro.
 
 **Is my data private?** Yes, the memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
+
+**Which login can I use?** Apple or Google — both work everywhere. Just use the same one you signed up with in the SecondBrain app.
 
 **Do I sign in every time?** No. One browser login, then it just works.
 
