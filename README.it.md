@@ -11,7 +11,7 @@
 
 Diglielo una volta — ogni assistente che usi se lo ricorda, nella chat dopo e il mese prossimo.
 
-[🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrain.icu](https://secondbrain.icu)
+[🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrainmemory.com](https://secondbrainmemory.com)
 
 <br>
 
@@ -52,7 +52,7 @@ Scarica l'app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)**
 
 Due passi, una volta sola:
 
-1. **Scarica l'app e attiva Pro** — su [secondbrain.icu](https://secondbrain.icu). La memoria fa parte di Pro.
+1. **Scarica l'app e attiva Pro** — su [secondbrainmemory.com](https://secondbrainmemory.com). La memoria fa parte di Pro.
 2. **Collega il tuo assistente** — trova la tua app qui sotto. Accedi **una volta dal browser** — dopo, la tua AI ricorda ovunque, per sempre.
 
 ### Usi Claude Code?
@@ -126,6 +126,6 @@ Altre soluzioni: **[Risoluzione problemi](docs/troubleshooting.md)** (in inglese
 
 <div align="center">
 
-Fatto con 🧠 da **SecondBrain** · [secondbrain.icu](https://secondbrain.icu)
+Fatto con 🧠 da **SecondBrain** · [secondbrainmemory.com](https://secondbrainmemory.com)
 
 </div>

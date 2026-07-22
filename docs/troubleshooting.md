@@ -46,4 +46,4 @@ See the plugin guide's troubleshooting table: [docs/plugin.md](plugin.md#trouble
 
 ---
 
-Still stuck? Visit [secondbrain.icu](https://secondbrain.icu).
+Still stuck? Visit [secondbrainmemory.com](https://secondbrainmemory.com).

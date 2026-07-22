@@ -7,7 +7,7 @@ memory: it recalls what matters at the start of a task and automatically saves t
 durable things — decisions, fixes, preferences, people, plans, events — backed by
 your own private notes.
 
-[secondbrain.icu](https://secondbrain.icu) · [Repository](https://github.com/fed3c3sa/secondbrain-shared-memory)
+[secondbrainmemory.com](https://secondbrainmemory.com) · [Repository](https://github.com/fed3c3sa/secondbrain-shared-memory)
 
 </div>
 

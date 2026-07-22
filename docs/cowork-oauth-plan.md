@@ -87,7 +87,7 @@ checks), same shape as the existing `mcp-connect` function. Routes:
 ```json
 {
   "issuer": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/oauth",
-  "authorization_endpoint": "https://secondbrain.icu/authorize",
+  "authorization_endpoint": "https://secondbrainmemory.com/authorize",
   "token_endpoint": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/oauth/token",
   "registration_endpoint": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/oauth/register",
   "response_types_supported": ["code"],
@@ -103,7 +103,7 @@ checks), same shape as the existing `mcp-connect` function. Routes:
 > pointed at the exact `resource_metadata` URL via the `WWW-Authenticate` header, and the
 > protected-resource doc names the AS issuer explicitly.
 
-### 3. Sign-in / consent page (`https://secondbrain.icu/authorize`)
+### 3. Sign-in / consent page (`https://secondbrainmemory.com/authorize`)
 
 Reuse the existing connect-page machinery (`mcp/website/connect/`), which already does
 Supabase PKCE login with Google/Apple. The new page:
@@ -118,7 +118,7 @@ Supabase PKCE login with Google/Apple. The new page:
    single-use authorization code bound to (user, client, redirect_uri, code_challenge).
 5. Redirects the browser to `redirect_uri?code=…&state=…`.
 
-Add `https://secondbrain.icu/authorize` to the Supabase Auth redirect allowlist
+Add `https://secondbrainmemory.com/authorize` to the Supabase Auth redirect allowlist
 (alongside the existing `…/connect/`).
 
 ### 4. New tables (one migration, e.g. `000XX_oauth.sql`)
@@ -206,7 +206,7 @@ function's per-call Pro check stays as the backstop.)
    Point Claude/Cowork at the URL and confirm it triggers the OAuth dance (it will fail at
    `/register`, but you'll see the discovery happen in logs).
 2. **DCR + authorize + issue-code + token (2–3 days):** the tables, the `oauth` function,
-   and the `secondbrain.icu/authorize` page (forked from `connect/`). Get end-to-end login
+   and the `secondbrainmemory.com/authorize` page (forked from `connect/`). Get end-to-end login
    working with a non-expiring PAT and no refresh (MVP).
 3. **Hardening (1–2 days):** short-lived access tokens + refresh rotation, Pro gating UX on
    the consent page, rate limiting, and the migration decision on tokenless 401s.
@@ -236,7 +236,7 @@ function's per-call Pro check stays as the backstop.)
 - `supabase/migrations/000XX_oauth.sql` — **new** tables above.
 - `mcp/website/authorize/` — **new** consent/sign-in page (fork of `connect/`).
 - `supabase/config.toml` — register the `oauth` function (`verify_jwt = false`).
-- Supabase dashboard — add `https://secondbrain.icu/authorize` to the Auth redirect allowlist.
+- Supabase dashboard — add `https://secondbrainmemory.com/authorize` to the Auth redirect allowlist.
 
 Once this ships, the Claude plugin's "cloud limitation" note (and the manual-token path)
 can be deleted: Cowork / claude.ai will sign in with a browser, exactly like local.

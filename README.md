@@ -13,7 +13,7 @@
 
 Tell it something once, and every assistant you use remembers it, in the next chat and next month.
 
-[🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrain.icu](https://secondbrain.icu)
+[🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrainmemory.com](https://secondbrainmemory.com)
 
 <br>
 
@@ -54,7 +54,7 @@ Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** �
 
 Two steps, once:
 
-1. **Get the app and turn on Pro** at [secondbrain.icu](https://secondbrain.icu). The memory is a Pro feature.
+1. **Get the app and turn on Pro** at [secondbrainmemory.com](https://secondbrainmemory.com). The memory is a Pro feature.
 2. **Connect your assistant** — find your app below. You sign in **once in your browser**; after that your AI remembers, everywhere, for good.
 
 ### Using Claude Code?
@@ -128,6 +128,6 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
 <div align="center">
 
-Made with 🧠 by **SecondBrain** · [secondbrain.icu](https://secondbrain.icu)
+Made with 🧠 by **SecondBrain** · [secondbrainmemory.com](https://secondbrainmemory.com)
 
 </div>
