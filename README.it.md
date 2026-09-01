@@ -9,7 +9,7 @@
 
 **La tua AI dimentica tutto appena chiudi la chat. SecondBrain le dà una memoria.**
 
-Diglielo una volta — ogni assistente che usi se lo ricorda, nella chat dopo e il mese prossimo.
+Diglielo una volta e ogni assistente che usi se lo ricorda, nella chat dopo e il mese prossimo.
 
 [🇬🇧 English](README.md) · [🇮🇹 Italiano](README.it.md) · [secondbrainmemory.com](https://secondbrainmemory.com)
 
@@ -25,7 +25,7 @@ Diglielo una volta — ogni assistente che usi se lo ricorda, nella chat dopo e 
 
 Di solito la tua AI riparte da zero a ogni conversazione: le rispieghi chi sei, a cosa stai lavorando, le tue preferenze. Ogni volta da capo.
 
-**SecondBrain è una memoria condivisa per i tuoi assistenti.** Glielo dici una volta e resta: il tuo assistente se lo ricorda domani, la settimana prossima, e anche se passi a un'altra app di AI. La memoria sono semplicemente le tue note nell'app SecondBrain — privata, tua, leggibile e modificabile quando vuoi dal telefono.
+**SecondBrain è una memoria condivisa per i tuoi assistenti.** Glielo dici una volta e resta: il tuo assistente se lo ricorda domani, la settimana prossima, e anche se passi a un'altra app di AI. La memoria sono semplicemente le tue note nell'app SecondBrain: privata, tua, leggibile e modificabile quando vuoi dal telefono.
 
 <div align="center">
 
@@ -46,23 +46,57 @@ Scarica l'app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)**
 
 ---
 
-## Collega la tua AI — un solo accesso
+## Collega la tua AI con un solo accesso
 
-> ✅ Accedi con **Apple** o **Google** — entrambi pienamente supportati. Usa lo **stesso account che usi nell'app SecondBrain**, così il tuo assistente trova le tue note.
+> ✅ Accedi con **Apple** o **Google**, entrambi pienamente supportati. Usa lo **stesso account che usi nell'app SecondBrain**, così il tuo assistente trova le tue note.
 
 Due passi, una volta sola:
 
-1. **Scarica l'app e attiva Pro** — su [secondbrainmemory.com](https://secondbrainmemory.com). La memoria fa parte di Pro.
-2. **Collega il tuo assistente** — trova la tua app qui sotto. Accedi **una volta dal browser** — dopo, la tua AI ricorda ovunque, per sempre.
+1. **Scarica l'app e attiva Pro** su [secondbrainmemory.com](https://secondbrainmemory.com). La memoria fa parte di Pro.
+2. **Collega il tuo assistente**. Trova la tua app qui sotto. Accedi **una volta dal browser**: dopo, la tua AI ricorda ovunque, per sempre.
 
 ### Usi Claude Code?
 
-1. Chiedi a Claude Code di installare il plugin — incolla questo in chat:
-   > *Installa il plugin SecondBrain da https://github.com/fed3c3sa/secondbrain-shared-memory*
-2. Lancia `/mcp`, scegli `secondbrain`, poi **Sign in** — si apre il browser.
-3. Clicca **Continua con Apple** o **Continua con Google**. Fatto.
+Tre comandi nel terminale. Lanciali uno alla volta:
 
-Se non riesce a connettersi, lancia `npx secondbrain-connect` dal terminale (serve [Node.js](docs/install-node.md)) e accedi da lì.
+```bash
+claude plugin marketplace add fed3c3sa/secondbrain-shared-memory
+claude plugin install secondbrain@secondbrain --scope user
+npx secondbrain-connect
+```
+
+L'ultimo comando apre il browser. Clicca **Continua con Apple** o **Continua con Google**, usando lo stesso account dell'app SecondBrain. È l'unica cosa che fai a mano. Non copi mai un token, un link o del JSON.
+
+Poi chiudi del tutto Claude Code e riaprilo.
+
+**Ancora più semplice:** chiedi a Claude Code di farlo per te. Incolla questo in chat:
+
+> *Installa il plugin SecondBrain da https://github.com/fed3c3sa/secondbrain-shared-memory*
+
+Conosce questi comandi e li esegue da solo.
+
+**Su Windows:** gli stessi tre comandi funzionano in PowerShell o CMD. Se vedi `npx is not recognized`, installa [Node.js](docs/install-node.md), apri un terminale **nuovo** e rilancia l'ultimo comando.
+
+#### Controlla che funzioni
+
+```bash
+claude mcp get secondbrain
+```
+
+Devi vedere `Status: ✔ Connected`. Per controllare anche il plugin:
+
+```bash
+claude plugin list
+```
+
+`secondbrain` deve comparire nella lista. Se c'è ma è spento, lancia `claude plugin enable secondbrain@secondbrain`.
+
+#### Cosa hai appena fatto
+
+- **Marketplace:** hai detto a Claude Code dove trovare il plugin.
+- **Plugin:** hai installato la skill della memoria, più un promemoria che ricorda a Claude di usarla da solo.
+- **`npx secondbrain-connect`:** ti ha fatto accedere e ha scritto la connessione dentro Claude Code, Claude Desktop e Cursor al posto tuo.
+- **Token di accesso:** creato e salvato per te. Non lo vedi e non lo digiti mai.
 
 ### Usi Cowork o Claude Desktop?
 
@@ -72,7 +106,7 @@ Se non riesce a connettersi, lancia `npx secondbrain-connect` dal terminale (ser
 
 ### Usi altro? Un comando
 
-Per Cursor, ChatGPT, Gemini e altre app — lancia questo una volta (serve [Node.js](docs/install-node.md)), accedi con Apple o Google dal browser, poi riavvia l'app:
+Per Cursor, ChatGPT, Gemini e altre app, lancia questo una volta (serve [Node.js](docs/install-node.md)), accedi con Apple o Google dal browser, poi riavvia l'app:
 
 ```bash
 npx secondbrain-connect
@@ -96,8 +130,10 @@ npx secondbrain-connect revoke --all  # scollega tutto
 ## Hai bisogno di aiuto?
 
 - **Dice che serve Pro?** Attiva Pro nell'app SecondBrain, poi riprova.
+- **Hai visto `Dynamic Client Registration rejected (HTTP 404)`?** Arriva dal pulsante di accesso interno di Claude Code, ed è un nostro bug, non un tuo errore. Lancia `npx secondbrain-connect` e riavvia Claude Code. Quel comando non usa affatto quel pulsante. Una correzione vera è in arrivo.
+- **Gli strumenti dicono `not_authenticated`?** Lancia `npx secondbrain-connect`, poi chiudi del tutto e riapri l'app.
 - **L'accesso non si è aperto?** Prova `npx secondbrain-connect --google`, oppure incolla nel browser il link che stampa.
-- **`npx` non trovato?** Installa Node.js — [guida](docs/install-node.md).
+- **`npx` non trovato?** Installa Node.js ([guida](docs/install-node.md)), poi apri un terminale nuovo.
 - **Non ricorda?** Chiudi del tutto e riapri l'app (e su Claude web, controlla che il connettore SecondBrain risulti **Connected**).
 
 Altre soluzioni: **[Risoluzione problemi](docs/troubleshooting.md)** (in inglese).
@@ -108,9 +144,9 @@ Altre soluzioni: **[Risoluzione problemi](docs/troubleshooting.md)** (in inglese
 
 **È gratis?** L'app è gratuita. La memoria condivisa fa parte di Pro.
 
-**I miei dati sono privati?** Sì — la memoria sono le tue note, nel tuo account. Solo l'assistente che colleghi può usarla, e lo scolleghi quando vuoi.
+**I miei dati sono privati?** Sì, la memoria sono le tue note, nel tuo account. Solo l'assistente che colleghi può usarla, e lo scolleghi quando vuoi.
 
-**Con quale account posso accedere?** Apple o Google — funzionano entrambi, ovunque. Usa lo stesso con cui ti sei registrato nell'app SecondBrain.
+**Con quale account posso accedere?** Apple o Google, funzionano entrambi, ovunque. Usa lo stesso con cui ti sei registrato nell'app SecondBrain.
 
 **Devo accedere ogni volta?** No. Un solo accesso dal browser, poi funziona e basta.
 
@@ -118,7 +154,7 @@ Altre soluzioni: **[Risoluzione problemi](docs/troubleshooting.md)** (in inglese
 
 ## Avanzate
 
-- **Plugin Claude — guida completa** (accesso per ogni app, zip offline, troubleshooting): [docs/plugin.md](docs/plugin.md) (in inglese)
+- **Plugin Claude, guida completa** (accesso per ogni app, zip offline, troubleshooting): [docs/plugin.md](docs/plugin.md) (in inglese)
 - **Aggiungere la connessione a mano** (qualsiasi app con MCP remoto): puntala su `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` (transport `http`) e accedi dal browser quando richiesto.
 - **Installare solo la skill** (senza plugin): metti [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) nella cartella skill del tuo strumento (es. `~/.claude/skills/`), oppure carica [secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip) in Claude Desktop (**Settings → Capabilities → Skills**).
 

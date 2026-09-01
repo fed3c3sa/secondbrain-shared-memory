@@ -50,21 +50,55 @@ Get the app: **[App Store (iPhone)](https://apps.apple.com/app/id6762130376)** �
 
 ## Connect your AI in one login
 
-> ✅ Sign in with **Apple** or **Google** — both fully supported. Use the **same account you use in the SecondBrain app**, so your assistant finds your notes.
+> ✅ Sign in with **Apple** or **Google**, both fully supported. Use the **same account you use in the SecondBrain app**, so your assistant finds your notes.
 
 Two steps, once:
 
 1. **Get the app and turn on Pro** at [secondbrainmemory.com](https://secondbrainmemory.com). The memory is a Pro feature.
-2. **Connect your assistant** — find your app below. You sign in **once in your browser**; after that your AI remembers, everywhere, for good.
+2. **Connect your assistant**. Find your app below. You sign in **once in your browser**; after that your AI remembers, everywhere, for good.
 
 ### Using Claude Code?
 
-1. Ask Claude Code to install the plugin — paste this into the chat:
-   > *Install the SecondBrain plugin from https://github.com/fed3c3sa/secondbrain-shared-memory*
-2. Run `/mcp`, pick `secondbrain`, choose **Sign in** — your browser opens.
-3. Click **Continue with Apple** or **Continue with Google**. Done.
+Three commands in your terminal. Run them one at a time:
 
-If it won't connect, run `npx secondbrain-connect` from your terminal (needs [Node.js](docs/install-node.md)) and sign in there instead.
+```bash
+claude plugin marketplace add fed3c3sa/secondbrain-shared-memory
+claude plugin install secondbrain@secondbrain --scope user
+npx secondbrain-connect
+```
+
+The last command opens your browser. Click **Continue with Apple** or **Continue with Google**, using the same account as the SecondBrain app. That is the only thing you do by hand. You never copy a token, a link, or any JSON.
+
+Then fully quit Claude Code and open it again.
+
+**Even easier:** ask Claude Code to do it for you. Paste this into the chat:
+
+> *Install the SecondBrain plugin from https://github.com/fed3c3sa/secondbrain-shared-memory*
+
+It knows these commands and runs them itself.
+
+**On Windows:** the same three commands work in PowerShell or CMD. If you see `npx is not recognized`, install [Node.js](docs/install-node.md), open a **new** terminal, and run the last command again.
+
+#### Check it worked
+
+```bash
+claude mcp get secondbrain
+```
+
+You want to see `Status: ✔ Connected`. To check the plugin too:
+
+```bash
+claude plugin list
+```
+
+`secondbrain` should be in the list. If it is listed but switched off, run `claude plugin enable secondbrain@secondbrain`.
+
+#### What you just did
+
+- **Marketplace:** told Claude Code where to find the plugin.
+- **Plugin:** installed the memory skill, plus a note that reminds Claude to use it on its own.
+- **`npx secondbrain-connect`:** signed you in and wrote the connection into Claude Code, Claude Desktop and Cursor for you.
+- **Access token:** created and saved for you. You never see it or type it.
 
 ### Using Cowork or Claude Desktop?
 
@@ -98,8 +132,10 @@ npx secondbrain-connect revoke --all  # disconnect everything
 ## Need help?
 
 - **It says you need Pro?** Turn on Pro in the SecondBrain app, then try again.
+- **Saw `Dynamic Client Registration rejected (HTTP 404)`?** That comes from Claude Code's own sign-in button, and it is our bug, not something you did wrong. Run `npx secondbrain-connect` instead, then restart Claude Code. That command does not use the sign-in button at all. A proper fix is on the way.
+- **Tools say `not_authenticated`?** Run `npx secondbrain-connect`, then fully quit and reopen the app.
 - **Sign-in didn't open?** Try `npx secondbrain-connect --google`, or copy the link it prints into your browser.
-- **`npx` not found?** Install Node.js ([guide](docs/install-node.md)).
+- **`npx` not found?** Install Node.js ([guide](docs/install-node.md)), then open a new terminal.
 - **Doesn't remember?** Fully quit and reopen the app (and on Claude web, make sure the SecondBrain connector shows **Connected**).
 
 More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
@@ -112,7 +148,7 @@ More fixes: **[Troubleshooting](docs/troubleshooting.md)**.
 
 **Is my data private?** Yes, the memory is your own notes in your account. Only the assistant you connect can use it, and you can disconnect any time.
 
-**Which login can I use?** Apple or Google — both work everywhere. Just use the same one you signed up with in the SecondBrain app.
+**Which login can I use?** Apple or Google, both work everywhere. Just use the same one you signed up with in the SecondBrain app.
 
 **Do I sign in every time?** No. One browser login, then it just works.
 

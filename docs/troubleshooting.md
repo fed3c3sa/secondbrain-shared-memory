@@ -9,6 +9,18 @@ Node.js is not installed yet, or your terminal was open before you installed it.
 1. Install Node.js: [docs/install-node.md](install-node.md).
 2. **Open a new terminal** and try `npx secondbrain-connect` again.
 
+## "Dynamic Client Registration rejected (HTTP 404)" in Claude Code
+
+You pressed the sign-in button inside Claude Code (`/mcp`, or `claude mcp login secondbrain`) and got that error. Nothing is wrong on your side.
+
+Claude Code looks for our sign-in details at an address our server cannot answer on, so its built-in login fails. One command fixes it, because it skips that login entirely:
+
+```bash
+npx secondbrain-connect
+```
+
+Then fully quit Claude Code and open it again. Check with `claude mcp get secondbrain`, it should say `Status: ✔ Connected`. A proper server-side fix is planned.
+
 ## It says I need Pro
 
 The memory is a Pro feature. Open the **SecondBrain app**, turn on **Pro** (that is the only place to do it), then run `npx secondbrain-connect` again.

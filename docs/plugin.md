@@ -3,7 +3,7 @@
 This repo doubles as a **Claude plugin** and a **single-plugin marketplace**. The plugin
 makes SecondBrain Claude's automatic memory: it bundles the **memory skill**, an
 **auto-memory primer**, and the **SecondBrain connection**. Sign-in is a one-time browser
-login (OAuth) — no tokens to paste — and works in Claude Code, Cowork, and claude.ai.
+login (OAuth), no tokens to paste, and works in Claude Code, Cowork, and claude.ai.
 
 - Marketplace: `fed3c3sa/secondbrain-shared-memory` (this repo)
 - Plugin: `secondbrain`
@@ -26,13 +26,13 @@ secondbrain/                      ← the plugin
 
 | Component | Effect |
 |---|---|
-| MCP server `secondbrain` | The memory tools — `memory_search`, `memory_save`, `memory_list`, `memory_link`, `calendar_create_event`, `reminder_create`, … Token-less; authenticates via browser OAuth on first use. |
+| MCP server `secondbrain` | The memory tools: `memory_search`, `memory_save`, `memory_list`, `memory_link`, `calendar_create_event`, `reminder_create`, … Token-less; authenticates via browser OAuth on first use. |
 | Skill `/secondbrain:secondbrain-memory` | Teaches Claude when to recall and save, how to file notes into your own folders, link related notes, and add calendar events/reminders. |
 | SessionStart hook | Each new session, reminds Claude to treat SecondBrain as its **primary** long-term memory and to save durable facts automatically. ~200 tokens/session. |
 
 The bundled connection is **token-less**. The SecondBrain MCP endpoint speaks **OAuth 2.1**
 (RFC 9728/8414/7591 + PKCE), so the first time memory is used your client runs a one-time
-browser sign-in (Apple/Google) and stores/refreshes the credential itself — nothing to
+browser sign-in (Apple/Google) and stores/refreshes the credential itself, nothing to
 paste, no duplicate connection, and it works the same in Claude Code, Cowork, and
 claude.ai.
 
@@ -47,7 +47,7 @@ It requires **SecondBrain Pro** (upgrade in the app). No API keys.
 These run the plugin system natively.
 
 **Easiest: just ask Claude.** Say *"install SecondBrain memory"* and it does the whole
-thing itself — marketplace, plugin, and sign-in — with nothing for you to copy or paste.
+thing itself: marketplace, plugin, and sign-in, with nothing for you to copy or paste.
 The skill instructs it to run the commands below on your behalf, verify with
 `claude plugin list` / `claude mcp get secondbrain`, and recover on its own if a step
 fails. All you do is click **Apple/Google** in the browser window that opens.
@@ -62,8 +62,21 @@ npx secondbrain-connect
 
 `--scope user` installs it for every project (`project` or `local` limit it to the
 current repo). The VS Code extension and the terminal CLI share one config, so
-installing once covers both. Restart Claude Code afterwards — the skill and the session
+installing once covers both. Restart Claude Code afterwards, because the skill and the session
 hook load in a new session.
+
+On **Windows** the same three commands work in PowerShell or CMD. If `npx` is not
+recognised, install Node ([guide](install-node.md)) and open a new terminal.
+
+Check it worked:
+
+```bash
+claude mcp get secondbrain   # want: Status: ✔ Connected
+claude plugin list           # want: secondbrain in the list
+```
+
+If the plugin is listed but switched off, run
+`claude plugin enable secondbrain@secondbrain`.
 
 The same from inside a session, as slash commands:
 
@@ -79,7 +92,7 @@ everywhere).
 
 ### Claude Desktop (chat app)
 
-The desktop chat app runs the plugin too — import the prebuilt archive:
+The desktop chat app runs the plugin too. Import the prebuilt archive:
 
 1. Download
    [secondbrain-plugin.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip)
@@ -96,13 +109,13 @@ A prebuilt archive lives at **[`dist/secondbrain-plugin.zip`](../dist/secondbrai
 (regenerate with `bash scripts/build-plugin-zip.sh`). It contains the skill, hook, and the
 token-less `.mcp.json` (no secrets).
 
-- **Claude Code / Cowork — local file** (loads for the session; needs Claude Code v2.1.128+):
+- **Claude Code / Cowork, local file** (loads for the session; needs Claude Code v2.1.128+):
 
   ```bash
   claude --plugin-dir dist/secondbrain-plugin.zip
   ```
 
-- **Claude Code / Cowork — hosted** (fetched at startup):
+- **Claude Code / Cowork, hosted** (fetched at startup):
 
   ```bash
   claude --plugin-url https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip
@@ -115,11 +128,11 @@ For a permanent install, prefer the marketplace path at the top.
 
 ---
 
-## Sign in (one browser login — no token to paste)
+## Sign in (one browser login, no token to paste)
 
 The connection is token-less; the SecondBrain MCP endpoint speaks **OAuth 2.1**. You sign
 in **once in the browser** (Apple/Google) and your client stores + refreshes the token
-itself — nothing to paste, and it stays connected. Where you trigger that one login
+itself, nothing to paste, and it stays connected. Where you trigger that one login
 depends on the surface:
 
 **Cowork / claude.ai (web).** There is no `/mcp` command here, and don't use
@@ -132,11 +145,11 @@ Connectors**):
    `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, then **Add**.
 2. Press **Connect** → a browser opens → log in with **Apple/Google** → done.
 
-> On the web, only the Connectors **Connect** button can store the token — the assistant
+> On the web, only the Connectors **Connect** button can store the token. The assistant
 > can't paste a durable sign-in link into a web session. It's still one login, then it
 > persists.
 
-**Claude Code (terminal or VS Code extension).** Run **`npx secondbrain-connect`** — or
+**Claude Code (terminal or VS Code extension).** Run **`npx secondbrain-connect`**, or
 just ask Claude to connect you and it runs it for itself. One browser login and the
 connection is written into your config. No Node? See the
 **[Node installer guide](install-node.md)**.
@@ -157,7 +170,7 @@ requires **Pro**.
 
 > **Why a browser login at all?** The memory is your private account, so the connection
 > needs your authorization. OAuth does that in the browser and hands your client a token
-> it keeps for you. Your token is a secret — never paste it into a chat; Claude is
+> it keeps for you. Your token is a secret, never paste it into a chat; Claude is
 > instructed never to print it. To disconnect, remove the connector or run
 > `npx secondbrain-connect revoke --all`.
 
@@ -188,7 +201,7 @@ claude plugin details secondbrain@secondbrain    # component inventory + token c
 
 Notes for contributors:
 
-- The bundled `.mcp.json` is committed and contains **no secrets** — only the MCP
+- The bundled `.mcp.json` is committed and contains **no secrets**, only the MCP
   endpoint URL. Auth is browser OAuth at runtime, so the `.gitignore` re-includes just
   this one file (`!secondbrain/.mcp.json`) while ignoring every other `.mcp.json`.
 - `version` is pinned in both `plugin.json` and `marketplace.json`. **Bump both** on each
@@ -209,9 +222,9 @@ Notes for contributors:
 | `/plugin` not recognized | Update Claude Code (`claude --version`); the plugin system needs a recent build. |
 | Plugin installed but skill missing | Run `/reload-plugins`, or restart. Check the `/plugin` **Errors** tab. |
 | Memory tools say `not_authenticated` | Claude Code: run `npx secondbrain-connect` (or ask Claude to). Cowork / claude.ai / Desktop: complete the browser sign-in your client prompts for (approve the SecondBrain connector). |
-| `Dynamic Client Registration rejected (HTTP 404)` in Claude Code | Expected for now — see the note under **Sign in**. Use `npx secondbrain-connect` instead of `/mcp`; verify with `claude mcp get secondbrain`. |
+| `Dynamic Client Registration rejected (HTTP 404)` in Claude Code | Expected for now, see the note under **Sign in**. Use `npx secondbrain-connect` instead of `/mcp`; verify with `claude mcp get secondbrain`. |
 | No browser sign-in prompt appears | Trigger a memory action (e.g. ask Claude to recall something) so the client connects and offers sign-in; or add SecondBrain as a connector in your client's settings. |
-| `pro_required` after sign-in | The memory is a Pro feature — open the SecondBrain app and turn on **Pro**, then retry. |
+| `pro_required` after sign-in | The memory is a Pro feature, so open the SecondBrain app and turn on **Pro**, then retry. |
 | Stale after an update | `/plugin marketplace update secondbrain` then `/reload-plugins`. |
 | Want a clean slate | `rm -rf ~/.claude/plugins/cache`, restart, reinstall. |
 
