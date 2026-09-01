@@ -3,6 +3,38 @@
 All notable changes to the **SecondBrain Memory** plugin are documented here.
 This project follows [semantic versioning](https://semver.org).
 
+## [0.3.1] — 2026-09-01
+
+Claude Code installs and connects itself. Nothing to copy or paste.
+
+### Changed
+- **Self-install.** The skill now carries the exact commands the assistant runs on its
+  own — `claude plugin marketplace add fed3c3sa/secondbrain-shared-memory`,
+  `claude plugin install secondbrain@secondbrain --scope user`, then
+  `npx secondbrain-connect` — plus how to locate the `claude` binary when it isn't on
+  PATH, and how to verify with `claude plugin list` / `claude mcp get secondbrain`.
+  Same commands on macOS, Windows and Linux; the VS Code extension and the terminal CLI
+  share one config. The user only clicks Apple/Google in the browser.
+- **Honest sign-in guidance for Claude Code.** `npx secondbrain-connect` is now the
+  documented path there, ahead of `/mcp` and `claude mcp login`. Claude Code's bundled
+  MCP SDK performs standalone RFC 9728 discovery against the **origin root**, which a
+  Supabase Edge Function origin cannot serve, so that route fails with
+  `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`.
+  `secondbrain-connect` writes a header-based connection that skips discovery entirely.
+  Cowork, claude.ai and Desktop follow the server's `WWW-Authenticate` challenge and are
+  unaffected — their Connector flow is unchanged.
+- The skill's recovery path never asks the user to paste a token, a URL, or JSON: on
+  failure the assistant re-runs `secondbrain-connect` and re-verifies by itself.
+
+### Fixed (server side, shipped separately)
+- The SecondBrain OAuth layer now serves a schema-valid OpenID Connect discovery
+  document with `jwks_uri` / `subject_types_supported` /
+  `id_token_signing_alg_values_supported` (plus an empty `jwks.json`), serves the
+  `.well-known` documents under `/functions/v1/mcp/` too, returns the 401 OAuth
+  challenge on unauthenticated `GET` as well as `POST`, and accepts private-use
+  `redirect_uris` (`vscode://`, `cursor://`). The remaining origin-root gap needs a
+  proxy on a domain we control.
+
 ## [0.3.0] — 2026-06-06
 
 Browser sign-in (OAuth) — the bundled connection is back, and now it works on cloud.

@@ -8,7 +8,9 @@ description: >-
   and fixes, stable preferences, project/stack facts, people, plans, useful
   repos/URLs. Also put time-bound things on the calendar/reminders. Connect
   related notes across folders by default. Backed by the user's own notes via the
-  SecondBrain MCP (Pro).
+  SecondBrain MCP (Pro). Also covers setup: when the user asks to install, add, connect,
+  or fix SecondBrain memory in Claude Code, run the marketplace/plugin install and
+  `npx secondbrain-connect` yourself, never asking them to copy or paste anything.
 allowed-tools:
   - secondbrain:memory_search
   - secondbrain:memory_get
@@ -33,26 +35,83 @@ durable knowledge outlives any single conversation. The tools are provided by th
 Use memory **proactively and automatically** — recalling and saving are part of
 the normal flow of every task, not something to wait for the user to request.
 
-## Signing in (automatic — the user just logs in)
+## Install and connect (you run every command — the user pastes nothing)
 
-The official helper `npx secondbrain-connect` signs the user in (Apple/Google) and
-**writes the access token straight into the app's config** — nothing to copy or
-paste. If any tool returns `status: "not_authenticated"`, get the user connected,
-then retry. Never abandon the task on this error.
+**Never ask the user to copy a URL, paste JSON or a token, open a settings panel,
+or type a command.** You have a terminal: install and sign in yourself, then retry
+the tool call. The only thing the user does is click **Apple/Google** in the browser
+window that opens. Never abandon the task on an auth error.
 
-Run `npx secondbrain-connect` yourself, right away — don't make the user type it. It
-opens their browser for a one-time sign-in and configures this assistant (and every
-other on the machine). Tell the user briefly: *"Opening your browser to sign in to
-SecondBrain."* If `npx`/Node isn't installed the command fails — give them the
-complete installer guide (Windows · macOS · Linux):
+Do this when memory tools are missing entirely, or when any tool returns
+`status: "not_authenticated"`.
+
+### Step 1 — install the plugin (Claude Code: CLI and the VS Code extension)
+
+Same two commands on **macOS, Windows and Linux** — the VS Code extension and the
+terminal CLI share one config, so installing once covers both:
+
+```bash
+claude plugin marketplace add fed3c3sa/secondbrain-shared-memory
+claude plugin install secondbrain@secondbrain --scope user
+```
+
+- `--scope user` makes it available in every project. Use `--scope project` only if
+  the user explicitly wants it for this repo alone.
+- **`claude: command not found`?** Don't send the user to fix their PATH — locate the
+  binary yourself: `which claude` (macOS/Linux) or `Get-Command claude` / `where claude`
+  (Windows PowerShell), and if that fails try `~/.local/bin/claude`. Call it by full path.
+- **Verify, don't assume:** `claude plugin list` must show `secondbrain`. If it is listed
+  but off, run `claude plugin enable secondbrain@secondbrain`.
+- The bundled skill and session hook only load in a **new** session. Say so plainly:
+  *"Installed. Restart Claude Code once and the memory loads automatically."*
+
+### Step 2 — sign the user in
+
+```bash
+npx secondbrain-connect
+```
+
+Run it yourself, right away. It opens the browser for a one-time Apple/Google sign-in
+and **writes the connection and the access token straight into the app config** for
+this assistant and every other one on the machine. Tell the user only:
+*"Opening your browser to sign in to SecondBrain."*
+
+If `npx`/Node is missing the command fails. Give them the installer guide
+(Windows · macOS · Linux):
 <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>,
-then run `npx secondbrain-connect` again. When it finishes, have the user fully
-restart the app (or reconnect the MCP servers) once, then retry.
+then run `npx secondbrain-connect` again yourself.
 
-Never print the user's access token in the chat — `secondbrain-connect` handles the
-token for you. If sign-in reports `pro_required`, tell the user the memory is a Pro
-feature and they should open the SecondBrain app and upgrade to Pro (the only way to
-go Pro). Pass along the `upgrade_url`.
+### Step 3 — verify, and recover without asking for anything
+
+Check your own work with read-only commands:
+
+```bash
+claude mcp list          # secondbrain should appear and health-check as connected
+claude mcp get secondbrain
+```
+
+**If the in-client browser sign-in fails** — `/mcp`, `claude mcp login secondbrain`, or
+an "authenticate" prompt erroring with
+`Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`
+— that is a **known server-side gap, not the user's fault**: Claude Code's bundled MCP
+SDK looks for OAuth discovery documents at the origin root, which a Supabase Edge
+Function origin cannot serve. A proxy fix is in progress. Do **not** retry that path and
+do **not** ask the user to paste anything. Instead:
+
+1. Re-run `npx secondbrain-connect` yourself. It configures the connection with an
+   `Authorization: Bearer` header, which bypasses OAuth discovery entirely and works today.
+2. Confirm with `claude mcp get secondbrain` that the entry is present and connected.
+3. Have the user fully restart the app (or reconnect the MCP servers) once, then retry
+   the memory tool.
+
+If `claude mcp get secondbrain` shows a connection with **no** auth header, that is the
+plugin's token-less OAuth entry; re-running `npx secondbrain-connect` replaces it with
+the authenticated one at user scope.
+
+**Never print the user's access token in the chat** — `secondbrain-connect` handles the
+token for you, so you never need to see or show one. If sign-in reports `pro_required`,
+tell the user the memory is a Pro feature and they should open the SecondBrain app and
+upgrade to Pro (the only way to go Pro). Pass along the `upgrade_url`.
 
 ## Recall (read first)
 

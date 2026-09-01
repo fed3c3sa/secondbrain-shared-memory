@@ -46,6 +46,27 @@ It requires **SecondBrain Pro** (upgrade in the app). No API keys.
 
 These run the plugin system natively.
 
+**Easiest: just ask Claude.** Say *"install SecondBrain memory"* and it does the whole
+thing itself — marketplace, plugin, and sign-in — with nothing for you to copy or paste.
+The skill instructs it to run the commands below on your behalf, verify with
+`claude plugin list` / `claude mcp get secondbrain`, and recover on its own if a step
+fails. All you do is click **Apple/Google** in the browser window that opens.
+
+Doing it by hand instead, from a terminal (macOS, Windows, and Linux alike):
+
+```bash
+claude plugin marketplace add fed3c3sa/secondbrain-shared-memory
+claude plugin install secondbrain@secondbrain --scope user
+npx secondbrain-connect
+```
+
+`--scope user` installs it for every project (`project` or `local` limit it to the
+current repo). The VS Code extension and the terminal CLI share one config, so
+installing once covers both. Restart Claude Code afterwards — the skill and the session
+hook load in a new session.
+
+The same from inside a session, as slash commands:
+
 ```text
 /plugin marketplace add fed3c3sa/secondbrain-shared-memory
 /plugin install secondbrain@secondbrain
@@ -54,12 +75,7 @@ These run the plugin system natively.
 
 Or interactively: `/plugin` → **Marketplaces** → add `fed3c3sa/secondbrain-shared-memory`
 → **Discover** → **SecondBrain Memory** → install (choose **User** scope to have it
-everywhere). From a terminal, the same without the leading slash:
-
-```bash
-claude plugin marketplace add fed3c3sa/secondbrain-shared-memory
-claude plugin install secondbrain@secondbrain
-```
+everywhere).
 
 ### Claude Desktop (chat app)
 
@@ -120,9 +136,18 @@ Connectors**):
 > can't paste a durable sign-in link into a web session. It's still one login, then it
 > persists.
 
-**Claude Code (terminal).** Run **`/mcp`**, select `secondbrain`, and complete the
-browser sign-in. (No-browser fallback: `npx secondbrain-connect`; no Node? see the
-**[Node installer guide](install-node.md)**.)
+**Claude Code (terminal or VS Code extension).** Run **`npx secondbrain-connect`** — or
+just ask Claude to connect you and it runs it for itself. One browser login and the
+connection is written into your config. No Node? See the
+**[Node installer guide](install-node.md)**.
+
+> Prefer `secondbrain-connect` over `/mcp` / `claude mcp login secondbrain` here. Claude
+> Code's bundled MCP SDK looks for the OAuth discovery documents at the **origin root**,
+> which a Supabase Edge Function origin can't serve, so that path currently fails with
+> `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`.
+> A proxy on a domain we control fixes it; until then `secondbrain-connect` writes a
+> header-based connection that skips discovery entirely. Cowork, claude.ai, and Desktop
+> follow the server's `WWW-Authenticate` challenge instead, so they are unaffected.
 
 **Claude Desktop (app).** **Settings → Connectors** → SecondBrain → **Connect** → log in.
 
@@ -183,7 +208,8 @@ Notes for contributors:
 |---|---|
 | `/plugin` not recognized | Update Claude Code (`claude --version`); the plugin system needs a recent build. |
 | Plugin installed but skill missing | Run `/reload-plugins`, or restart. Check the `/plugin` **Errors** tab. |
-| Memory tools say `not_authenticated` | Complete the browser sign-in your client prompts for (approve the SecondBrain connector / `authenticate` step). Fallback: `npx secondbrain-connect`. |
+| Memory tools say `not_authenticated` | Claude Code: run `npx secondbrain-connect` (or ask Claude to). Cowork / claude.ai / Desktop: complete the browser sign-in your client prompts for (approve the SecondBrain connector). |
+| `Dynamic Client Registration rejected (HTTP 404)` in Claude Code | Expected for now — see the note under **Sign in**. Use `npx secondbrain-connect` instead of `/mcp`; verify with `claude mcp get secondbrain`. |
 | No browser sign-in prompt appears | Trigger a memory action (e.g. ask Claude to recall something) so the client connects and offers sign-in; or add SecondBrain as a connector in your client's settings. |
 | `pro_required` after sign-in | The memory is a Pro feature — open the SecondBrain app and turn on **Pro**, then retry. |
 | Stale after an update | `/plugin marketplace update secondbrain` then `/reload-plugins`. |

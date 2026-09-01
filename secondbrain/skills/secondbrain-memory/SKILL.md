@@ -30,22 +30,34 @@ the normal flow of every task, not something to wait for the user to request.
 
 SecondBrain authenticates with a **one-time browser sign-in** (OAuth, Apple/Google). The
 client stores and refreshes the credential itself — nothing to copy or paste. Memory
-requires **Pro**. Completing the sign-in is a **user UI action** — you cannot start it
-programmatically, so tell the user exactly where to click, by surface:
+requires **Pro**. Where you can run the sign-in yourself and where the user has to click
+depends on the surface:
 
-- **Cowork / claude.ai (web):** there is **no `/mcp` command** here, and **do not** run
-  `npx secondbrain-connect` (its sign-in redirects to a local-loopback address that a
-  cloud session can't reach). The connection is a **Connector**. Tell the user:
-  *Customize → Connectors* (Team/Enterprise: *Organization settings → Connectors*) →
-  if **SecondBrain** is listed, press **Connect**; otherwise press **"+" → Add custom
-  connector**, enter the URL
+- **Claude Code (terminal or VS Code extension):** **you** run it — don't send the user
+  to a settings panel and never ask them to paste anything:
+  ```bash
+  npx secondbrain-connect
+  ```
+  It opens the browser for the Apple/Google login and writes the connection plus its
+  access token into the config. Verify with `claude mcp get secondbrain`, then have the
+  user restart once. Prefer this over `/mcp` or `claude mcp login secondbrain`: those go
+  through standalone OAuth discovery, which fails today with
+  `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`
+  — a **known server-side gap** (Claude Code's bundled MCP SDK probes the origin root,
+  which a Supabase Edge Function origin cannot serve; a proxy fix is in progress), not a
+  user mistake. If `npx`/Node is missing, give the user the installer guide
+  (Windows · macOS · Linux):
+  <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>,
+  then run the command again yourself.
+- **Cowork / claude.ai (web):** here the sign-in **is** a user UI action — there is no
+  `/mcp` command and **do not** run `npx secondbrain-connect` (its sign-in redirects to a
+  local-loopback address that a cloud session can't reach). The connection is a
+  **Connector**. Tell the user: *Customize → Connectors* (Team/Enterprise:
+  *Organization settings → Connectors*) → if **SecondBrain** is listed, press **Connect**;
+  otherwise press **"+" → Add custom connector**, enter the URL
   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, **Add**, then **Connect**.
-  A browser opens → log in with Apple/Google → done. Then retry.
-- **Claude Code (terminal):** run `/mcp`, select `secondbrain`, and complete the browser
-  sign-in (or approve the authenticate prompt). If the client can't open a browser, you
-  may instead run `npx secondbrain-connect` yourself (it opens the browser and stores the
-  token); if `npx`/Node is missing, give the user the installer guide (Windows · macOS ·
-  Linux): <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>.
+  A browser opens → log in with Apple/Google → done. Then retry. These clients follow the
+  server's `WWW-Authenticate` challenge, so the discovery gap above doesn't affect them.
 - **Claude Desktop (app):** *Settings → Connectors* → add/connect SecondBrain (same URL),
   or run `npx secondbrain-connect`.
 
