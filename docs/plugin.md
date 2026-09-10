@@ -100,10 +100,30 @@ Or interactively: `/plugin` → **Marketplaces** → add `fed3c3sa/secondbrain-s
 → **Discover** → **SecondBrain Memory** → install (choose **User** scope to have it
 everywhere).
 
-### ChatGPT desktop app · Codex
+### Which ChatGPT surface gets what
 
-The ChatGPT desktop app runs the same plugin system (its `codex` runtime reads this
-repo's marketplace directly). Three commands, from a terminal:
+ChatGPT has two surfaces and they consume different things:
+
+| Surface | Skill from the plugin | MCP tools from the plugin |
+|---|---|---|
+| **Codex** — the CLI, and the Codex surface in the ChatGPT app | yes | yes, after `codex mcp login secondbrain` |
+| **ChatGPT chat** — the desktop app's chat *and* chatgpt.com | yes | **no** |
+
+The chat surface resolves tools from **connectors and apps registered in the user's
+ChatGPT account**, not from a plugin installed off a git marketplace. You can see this in
+OpenAI's own catalog: every plugin whose tools work in chat ships an `.app.json` binding
+it to an OpenAI-issued id (`asdk_app_…` / `connector_…`) — Notion, Linear, Slack, GitHub.
+The ones with only a `.mcp.json` and no `.app.json`, like Cloudflare, are Codex-only, and
+that is the category SecondBrain is in.
+
+Those ids are issued by OpenAI, so they can't be minted from this repo. The two ways to
+get memory into ChatGPT chat are therefore: a **custom connector** (per account, works
+today, below) or **submitting the plugin to the ChatGPT directory** so every user gets a
+published `asdk_app_…` in one click.
+
+### Codex — the CLI and the ChatGPT app's Codex surface
+
+Codex runs this repo's marketplace directly. Three commands, from a terminal:
 
 ```bash
 codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
@@ -128,16 +148,18 @@ Then fully quit and reopen ChatGPT, because the skill and the session hook load 
 session. If `codex` isn't on `PATH`, the app ships it at
 `/Applications/ChatGPT.app/Contents/Resources/codex` on macOS.
 
-### ChatGPT on the web (chatgpt.com)
+### ChatGPT chat — the custom connector
 
-The web chat surface doesn't run locally installed plugins; it takes its tools from
-**connectors**, which live server-side. Add SecondBrain as a custom connector instead
-(needs a paid ChatGPT plan):
+This is what gives the **chat** surface the memory tools, in the desktop app and on the
+web alike. Do it once on **chatgpt.com in a browser** (needs a paid ChatGPT plan):
 
 1. **Settings → Apps → Advanced → Developer mode**, turn it on.
-2. **"+" → Add custom connector.** Name `SecondBrain`, URL
+2. **"+" → Create custom connector.** Name `SecondBrain`, URL
    `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**.
 3. **Connect** → log in with Apple/Google.
+
+The connector belongs to the ChatGPT account, so it syncs to the desktop app — no second
+setup there. It is independent of the plugin: you can have either, or both.
 
 ### Claude Desktop (chat app)
 
@@ -275,8 +297,8 @@ Notes for contributors:
 
 | Symptom | Fix |
 |---|---|
-| ChatGPT: plugin installed, memory tools missing, no login ever offered | Run `codex mcp login secondbrain`, confirm `codex mcp list` shows `Auth: OAuth`, restart the app. Installing the plugin does not sign the MCP server in. |
-| ChatGPT web says no SecondBrain integration is connected | The web chat uses connectors, not local plugins. Add the custom connector (Developer mode) as described above. |
+| ChatGPT chat sees the plugin but says it has no tool to query SecondBrain | Expected — chat can't get tools from a plugin. Add the custom connector (Developer mode), then restart. The plugin is still worth keeping for the skill and for Codex. |
+| Codex: plugin installed, memory tools missing, no login ever offered | Run `codex mcp login secondbrain`, confirm `codex mcp list` shows `Auth: OAuth`, restart. Installing the plugin does not sign the MCP server in. |
 | `/plugin` not recognized | Update Claude Code (`claude --version`); the plugin system needs a recent build. |
 | Plugin installed but skill missing | Run `/reload-plugins`, or restart. Check the `/plugin` **Errors** tab. |
 | Memory tools say `not_authenticated` | Claude Code: run `npx secondbrain-connect` (or ask Claude to). Cowork / claude.ai / Desktop: complete the browser sign-in your client prompts for (approve the SecondBrain connector). |

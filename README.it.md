@@ -100,8 +100,26 @@ claude plugin list
 
 ### Usi ChatGPT?
 
-**App ChatGPT per desktop (Mac/Windows).** Stesso marketplace di Claude, tre comandi.
-Lanciali uno alla volta:
+Fallo su **chatgpt.com dal browser**, una volta sola. Poi funziona anche nell'app ChatGPT
+per desktop, perché la connessione appartiene al tuo account ChatGPT. Serve un piano
+ChatGPT a pagamento.
+
+1. **Impostazioni → App → Avanzate → Modalità sviluppatore**, attivala.
+2. **"+" → Crea connettore personalizzato.** Nome: `SecondBrain`. URL:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Autenticazione: **OAuth**.
+3. Premi **Connect** e accedi con **Apple o Google**, lo stesso account dell'app
+   SecondBrain.
+
+Poi chiudi del tutto ChatGPT e riaprilo.
+
+> **Perché non il plugin?** La chat di ChatGPT prende i suoi strumenti dai *connettori*
+> del tuo account, non da un plugin installato da un marketplace. Installare il nostro
+> plugin in ChatGPT gli dà la *skill* della memoria, ma nessuno strumento: l'assistente
+> dirà che vede SecondBrain ma non ha con cosa interrogarlo. È il connettore qui sopra a
+> collegarlo davvero.
+
+**Usi Codex** (la CLI `codex`, o il lato Codex dell'app ChatGPT)? Quello sì che esegue il
+plugin, dallo stesso marketplace di Claude:
 
 ```bash
 codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
@@ -109,31 +127,9 @@ codex plugin add secondbrain@secondbrain
 codex mcp login secondbrain
 ```
 
-L'ultimo apre il browser: clicca **Continua con Apple** o **Continua con Google**, lo
-stesso account dell'app SecondBrain. **Non saltarlo:** i primi due comandi installano il
-plugin ma lasciano la memoria *scollegata*, ed è per questo che altrimenti non succede
-niente.
-
-Controlla che funzioni:
-
-```bash
-codex mcp list
-```
-
-La riga `secondbrain` deve dire `Auth: OAuth`. Se dice `Not logged in`, rilancia
-`codex mcp login secondbrain`. Poi chiudi del tutto ChatGPT e riaprilo.
-
-> `codex` non trovato? L'app ChatGPT lo include. Su Mac usa il percorso completo:
-> `/Applications/ChatGPT.app/Contents/Resources/codex mcp login secondbrain`
-
-**ChatGPT dal browser (chatgpt.com).** La chat web non usa i plugin installati sul
-computer, quindi lì SecondBrain si aggiunge come **connettore** (serve un piano ChatGPT a
-pagamento):
-
-1. **Impostazioni → App → Avanzate → Modalità sviluppatore**, attivala.
-2. **"+" → Aggiungi connettore personalizzato.** Nome: `SecondBrain`. URL:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Autenticazione: **OAuth**.
-3. Premi **Connect** e accedi con **Apple o Google**.
+L'ultimo comando apre il browser per l'accesso con Apple o Google. **Non saltarlo:** i
+primi due installano il plugin ma lasciano la memoria *scollegata*. Controlla con
+`codex mcp list`: la riga `secondbrain` deve dire `Auth: OAuth`.
 
 ### Usi Cowork o Claude Desktop?
 
@@ -168,7 +164,8 @@ npx secondbrain-connect revoke --all  # scollega tutto
 
 - **Dice che serve Pro?** Attiva Pro nell'app SecondBrain, poi riprova.
 - **Hai visto `Dynamic Client Registration rejected (HTTP 404)`?** Arriva dal pulsante di accesso interno di Claude Code, ed è un nostro bug, non un tuo errore. Lancia `npx secondbrain-connect` e riavvia Claude Code. Quel comando non usa affatto quel pulsante. Una correzione vera è in arrivo.
-- **L'hai installato su ChatGPT e non succede niente?** Il plugin installa la memoria ma non fa l'accesso. Lancia `codex mcp login secondbrain`, controlla che `codex mcp list` dica `Auth: OAuth`, poi riavvia ChatGPT.
+- **ChatGPT dice che vede SecondBrain ma non ha strumenti per interrogarlo?** È il plugin senza il connettore. La chat di ChatGPT prende gli strumenti solo dai connettori: aggiungi il connettore personalizzato qui sopra, poi riavvia ChatGPT.
+- **L'hai installato su Codex e non succede niente?** Il plugin installa la memoria ma non fa l'accesso. Lancia `codex mcp login secondbrain`, controlla che `codex mcp list` dica `Auth: OAuth`, poi riavvia.
 - **Gli strumenti dicono `not_authenticated`?** Lancia `npx secondbrain-connect`, poi chiudi del tutto e riapri l'app.
 - **L'accesso non si è aperto?** Prova `npx secondbrain-connect --google`, oppure incolla nel browser il link che stampa.
 - **`npx` non trovato?** Installa Node.js ([guida](docs/install-node.md)), poi apri un terminale nuovo.

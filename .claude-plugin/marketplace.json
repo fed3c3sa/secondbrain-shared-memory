@@ -12,7 +12,7 @@
       "name": "secondbrain",
       "source": "./secondbrain",
       "description": "Make SecondBrain your assistant's automatic long-term memory: a skill that recalls what matters and saves durable facts, decisions, preferences, people, and events on its own, plus an auto-memory primer and the SecondBrain connection. Sign-in is a one-time browser login (OAuth) — nothing to paste — in Claude Code, Cowork, claude.ai, and the ChatGPT desktop app / Codex. Backed by your own private notes (Pro).",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "author": {
         "name": "Federico Cesarini"
       },

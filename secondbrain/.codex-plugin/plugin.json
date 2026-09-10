@@ -1,6 +1,6 @@
 {
   "name": "secondbrain",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "SecondBrain is your assistant's long-term memory: it recalls what matters at the start of a task and saves durable facts, decisions, preferences, people, and events on its own. Sign-in is a one-time browser login (Apple/Google) — no token to paste.",
   "author": {
     "name": "Federico Cesarini",

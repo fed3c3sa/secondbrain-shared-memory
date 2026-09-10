@@ -102,8 +102,24 @@ claude plugin list
 
 ### Using ChatGPT?
 
-**The ChatGPT desktop app (Mac/Windows).** Same marketplace as Claude, three commands.
-Run them one at a time:
+Do this on **chatgpt.com in a browser**, once. It then works in the ChatGPT desktop app
+too, because the connection belongs to your ChatGPT account. Needs a paid ChatGPT plan.
+
+1. **Settings → Apps → Advanced → Developer mode**, turn it on.
+2. **"+" → Create custom connector.** Name: `SecondBrain`. URL:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Authentication: **OAuth**.
+3. Press **Connect** and log in with **Apple or Google**, same account as the SecondBrain
+   app.
+
+Then fully quit and reopen ChatGPT.
+
+> **Why not the plugin?** ChatGPT's chat gets its tools from *connectors* in your account,
+> not from a plugin installed off a marketplace. Installing our plugin in ChatGPT gives it
+> the memory *skill*, but no memory tools — the assistant will say it can see SecondBrain
+> but has nothing to query it with. The connector above is what actually connects it.
+
+**Using Codex** (the `codex` CLI, or the Codex side of the ChatGPT app)? That one *does*
+run the plugin, from the same marketplace as Claude:
 
 ```bash
 codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
@@ -111,30 +127,9 @@ codex plugin add secondbrain@secondbrain
 codex mcp login secondbrain
 ```
 
-The last one opens your browser: click **Continue with Apple** or **Continue with
-Google**, same account as the SecondBrain app. **Don't skip it** — the first two commands
-install the plugin but leave the memory *signed out*, which is why nothing happens
-otherwise.
-
-Check it worked:
-
-```bash
-codex mcp list
-```
-
-The `secondbrain` row must say `Auth: OAuth`. If it says `Not logged in`, run
-`codex mcp login secondbrain` again. Then fully quit and reopen ChatGPT.
-
-> `codex` not found? The ChatGPT app ships it. On a Mac, use the full path:
-> `/Applications/ChatGPT.app/Contents/Resources/codex mcp login secondbrain`
-
-**ChatGPT in the browser (chatgpt.com).** The web chat doesn't use locally installed
-plugins, so you add SecondBrain as a **connector** instead (needs a paid ChatGPT plan):
-
-1. **Settings → Apps → Advanced → Developer mode**, turn it on.
-2. **"+" → Add custom connector.** Name: `SecondBrain`. URL:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Authentication: **OAuth**.
-3. Press **Connect** and log in with **Apple or Google**.
+The last command opens your browser for the Apple/Google login. **Don't skip it** — the
+first two install the plugin but leave the memory *signed out*. Check with
+`codex mcp list`: the `secondbrain` row must say `Auth: OAuth`.
 
 ### Using Cowork or Claude Desktop?
 
@@ -169,7 +164,8 @@ npx secondbrain-connect revoke --all  # disconnect everything
 
 - **It says you need Pro?** Turn on Pro in the SecondBrain app, then try again.
 - **Saw `Dynamic Client Registration rejected (HTTP 404)`?** That comes from Claude Code's own sign-in button, and it is our bug, not something you did wrong. Run `npx secondbrain-connect` instead, then restart Claude Code. That command does not use the sign-in button at all. A proper fix is on the way.
-- **Installed it in ChatGPT and nothing happened?** The plugin installs the memory but doesn't sign it in. Run `codex mcp login secondbrain`, check `codex mcp list` says `Auth: OAuth`, and restart ChatGPT.
+- **ChatGPT says it can see SecondBrain but has no tool to query it?** That's the plugin without the connector. ChatGPT's chat only gets tools from connectors — add the custom connector above, then restart ChatGPT.
+- **Installed it in Codex and nothing happened?** The plugin installs the memory but doesn't sign it in. Run `codex mcp login secondbrain`, check `codex mcp list` says `Auth: OAuth`, and restart.
 - **Tools say `not_authenticated`?** Run `npx secondbrain-connect`, then fully quit and reopen the app.
 - **Sign-in didn't open?** Try `npx secondbrain-connect --google`, or copy the link it prints into your browser.
 - **`npx` not found?** Install Node.js ([guide](docs/install-node.md)), then open a new terminal.

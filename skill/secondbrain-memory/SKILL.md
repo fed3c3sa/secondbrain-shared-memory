@@ -113,7 +113,7 @@ token for you, so you never need to see or show one. If sign-in reports `pro_req
 tell the user the memory is a Pro feature and they should open the SecondBrain app and
 upgrade to Pro (the only way to go Pro). Pass along the `upgrade_url`.
 
-### On the ChatGPT desktop app / Codex
+### On Codex (the CLI, and the Codex surface in the ChatGPT app)
 
 The same marketplace works there, with `codex` instead of `claude`:
 
@@ -131,12 +131,20 @@ Apple/Google login. Verify with `codex mcp list` — the `secondbrain` row must 
 If `codex` isn't on PATH, the ChatGPT desktop app ships it at
 `/Applications/ChatGPT.app/Contents/Resources/codex` (macOS).
 
-**ChatGPT on the web (chatgpt.com)** is different: the chat surface gets its tools
-from **connectors**, not from a locally installed plugin, so there is nothing you can
-run. Tell the user: *Settings → Apps → Advanced → **Developer mode*** (needs a paid
-plan), then **"+" → Add/Create custom connector**, name **SecondBrain**, URL
+### On ChatGPT chat (the desktop app and chatgpt.com)
+
+**A plugin cannot give this surface tools**, so there is nothing for you to run. The
+ChatGPT chat surface takes its tools from **connectors** held in the user's ChatGPT
+account; a plugin installed from a git marketplace contributes the skill only. If you
+can see this skill but no `secondbrain` tools, say so plainly rather than asking the
+user to re-enable or reinstall the plugin, or waiting for a connection to appear.
+
+Tell them, once: on **chatgpt.com in a browser**, *Settings → Apps → Advanced →
+**Developer mode*** (needs a paid ChatGPT plan), then **"+" → Create custom
+connector**, name **SecondBrain**, URL
 `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**
-→ **Connect** → log in with Apple/Google.
+→ **Connect** → log in with Apple/Google. That connector then works in the desktop app
+too. Restart ChatGPT and retry.
 
 ## Recall (read first)
 

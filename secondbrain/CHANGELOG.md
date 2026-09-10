@@ -3,6 +3,31 @@
 All notable changes to the **SecondBrain Memory** plugin are documented here.
 This project follows [semantic versioning](https://semver.org).
 
+## [0.4.1] — 2026-09-10
+
+Says the true thing about ChatGPT: a plugin can't give the **chat** surface tools.
+
+### Changed
+- **Corrected the ChatGPT guidance in the skill, primer and docs.** 0.4.0 assumed the
+  ChatGPT desktop app would use the plugin's MCP server once signed in. It doesn't. The
+  ChatGPT **chat** surface — the desktop app's chat *and* chatgpt.com — resolves tools
+  from **connectors and apps registered in the user's ChatGPT account**, never from a
+  plugin installed off a git marketplace. It picks up the plugin's *skill* only, which is
+  why the assistant reports it can see SecondBrain but has nothing to query it with.
+- The split, now documented everywhere: **Codex** (the CLI and the Codex surface in the
+  ChatGPT app) runs the plugin's MCP server after `codex mcp login secondbrain`;
+  **ChatGPT chat** needs the Developer-mode **custom connector** pointed at the same URL,
+  which then covers web and desktop together.
+- The skill and primer now tell the assistant to **say so plainly** when it has the skill
+  but no tools, instead of stalling on "the connection isn't available yet" or sending the
+  user to re-enable the plugin.
+
+### Note for later
+Getting one-click memory into ChatGPT chat means submitting SecondBrain to OpenAI's plugin
+directory. Published plugins carry an `.app.json` binding them to an OpenAI-issued id
+(`asdk_app_…` / `connector_…`), which is what the chat surface actually resolves — see
+Notion, Linear and Slack. Ids are issued by OpenAI, so this can't be done from the repo.
+
 ## [0.4.0] — 2026-09-10
 
 Works in the **ChatGPT desktop app / Codex** too, from the same marketplace.

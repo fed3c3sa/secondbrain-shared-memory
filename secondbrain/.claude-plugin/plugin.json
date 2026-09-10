@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "secondbrain",
   "displayName": "SecondBrain Memory",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Make SecondBrain your assistant's automatic long-term memory: a skill that recalls at the start of a task and saves durable facts, decisions, preferences, people, and events on its own, plus an auto-memory primer and the SecondBrain connection. Sign-in is a one-time browser login (OAuth, Apple/Google) — no token to paste — and works in Claude Code, Cowork, claude.ai, and the ChatGPT desktop app / Codex. Backed by your own private notes (Pro).",
   "author": {
     "name": "Federico Cesarini",
