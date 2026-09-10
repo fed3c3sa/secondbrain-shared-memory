@@ -104,11 +104,13 @@ Fallo su **chatgpt.com dal browser**, una volta sola. Poi funziona anche nell'ap
 per desktop, perché la connessione appartiene al tuo account ChatGPT. Serve un piano
 ChatGPT a pagamento.
 
-1. **Impostazioni → App → Avanzate → Modalità sviluppatore**, attivala.
-2. **"+" → Crea connettore personalizzato.** Nome: `SecondBrain`. URL:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Autenticazione: **OAuth**.
-3. Premi **Connect** e accedi con **Apple o Google**, lo stesso account dell'app
-   SecondBrain.
+1. **Impostazioni → Sicurezza e accesso → Modalità sviluppatore**, attivala. (Nelle
+   versioni più vecchie sta in **Impostazioni → App → Avanzate**.)
+2. Vai su **Plugin** e premi **"+"**. Chiamalo `SecondBrain`, mettici una descrizione
+   qualsiasi e sotto **Connessione** inserisci l'URL del server MCP:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`
+3. Crea la connessione, poi premi **Connect** e accedi con **Apple o Google**, lo stesso
+   account dell'app SecondBrain. A fine setup ChatGPT elenca i 12 strumenti della memoria.
 
 Poi chiudi del tutto ChatGPT e riaprilo.
 

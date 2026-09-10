@@ -3,6 +3,20 @@
 All notable changes to the **SecondBrain Memory** plugin are documented here.
 This project follows [semantic versioning](https://semver.org).
 
+## [0.4.2] — 2026-09-10
+
+Right menu path for ChatGPT: OpenAI moved Developer mode, and the connector is created
+from the **Plugins** page.
+
+### Changed
+- **Corrected the ChatGPT setup steps everywhere.** Developer mode now lives under
+  *Settings → **Security and login***, not *Settings → Apps → Advanced* (kept as an
+  "older builds" note). And the connection is made from the **Plugins** page: press
+  **"+"**, give it a name and description, and paste the MCP server URL — including the
+  `/mcp` path — under **Connection**. There is no separate "Create custom connector"
+  item any more.
+- Skill, primer, READMEs, docs and the website all carry the corrected path.
+
 ## [0.4.1] — 2026-09-10
 
 Says the true thing about ChatGPT: a plugin can't give the **chat** surface tools.

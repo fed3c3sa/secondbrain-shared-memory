@@ -153,10 +153,13 @@ session. If `codex` isn't on `PATH`, the app ships it at
 This is what gives the **chat** surface the memory tools, in the desktop app and on the
 web alike. Do it once on **chatgpt.com in a browser** (needs a paid ChatGPT plan):
 
-1. **Settings → Apps → Advanced → Developer mode**, turn it on.
-2. **"+" → Create custom connector.** Name `SecondBrain`, URL
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**.
-3. **Connect** → log in with Apple/Google.
+1. **Settings → Security and login → Developer mode**, turn it on. (Older builds: under
+   **Settings → Apps → Advanced**.)
+2. Go to **Plugins**, press **"+"**, give it a name and description, and under
+   **Connection** enter the MCP server URL, `/mcp` path included:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`
+3. Create the connection, then **Connect** and log in with Apple/Google. ChatGPT shows
+   the discovered tools when it's done.
 
 The connector belongs to the ChatGPT account, so it syncs to the desktop app — no second
 setup there. It is independent of the plugin: you can have either, or both.

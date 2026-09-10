@@ -139,12 +139,13 @@ account; a plugin installed from a git marketplace contributes the skill only. I
 can see this skill but no `secondbrain` tools, say so plainly rather than asking the
 user to re-enable or reinstall the plugin, or waiting for a connection to appear.
 
-Tell them, once: on **chatgpt.com in a browser**, *Settings → Apps → Advanced →
-**Developer mode*** (needs a paid ChatGPT plan), then **"+" → Create custom
-connector**, name **SecondBrain**, URL
-`https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**
-→ **Connect** → log in with Apple/Google. That connector then works in the desktop app
-too. Restart ChatGPT and retry.
+Tell them, once: on **chatgpt.com in a browser**, *Settings → **Security and login**
+→ **Developer mode*** (older builds: *Settings → Apps → Advanced*; needs a paid ChatGPT
+plan). Then go to **Plugins**, press **"+"**, name it **SecondBrain**, and under
+**Connection** paste the MCP server URL
+`https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Create the connection, then
+**Connect** and log in with Apple/Google. It belongs to the ChatGPT account, so it then
+works in the desktop app too. Restart ChatGPT and retry.
 
 ## Recall (read first)
 

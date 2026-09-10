@@ -67,11 +67,12 @@ depends on the surface:
   git marketplace can hand it a skill, but not MCP tools. Don't ask the user to re-enable
   or reinstall the plugin, and don't wait for the connection to "become available". Tell
   them, once, exactly this: on **chatgpt.com in a browser** go to
-  *Settings → Apps → Advanced → **Developer mode*** (needs a paid ChatGPT plan), then
-  **"+" → Create custom connector**, name **SecondBrain**, URL
-  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**,
-  then **Connect** and log in with Apple/Google. The connector then works in the desktop
-  app too. Restart ChatGPT and retry.
+  *Settings → **Security and login** → **Developer mode*** (older builds: *Settings →
+  Apps → Advanced*; needs a paid ChatGPT plan), then go to **Plugins**, press **"+"**,
+  name it **SecondBrain**, and under **Connection** paste the MCP server URL
+  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Create the connection, then
+  **Connect** and log in with Apple/Google. It belongs to the ChatGPT account, so it then
+  works in the desktop app too. Restart ChatGPT and retry.
 - **Codex (the CLI, and the Codex surface in the ChatGPT app):** here the plugin's MCP
   server *is* used, but installing the plugin **does not sign it in** — that is a
   separate, one-time step, and the usual reason the memory tools are missing. **You** run

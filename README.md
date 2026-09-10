@@ -105,11 +105,13 @@ claude plugin list
 Do this on **chatgpt.com in a browser**, once. It then works in the ChatGPT desktop app
 too, because the connection belongs to your ChatGPT account. Needs a paid ChatGPT plan.
 
-1. **Settings → Apps → Advanced → Developer mode**, turn it on.
-2. **"+" → Create custom connector.** Name: `SecondBrain`. URL:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Authentication: **OAuth**.
-3. Press **Connect** and log in with **Apple or Google**, same account as the SecondBrain
-   app.
+1. **Settings → Security and login → Developer mode**, turn it on. (Older builds put it
+   under **Settings → Apps → Advanced**.)
+2. Go to **Plugins** and press **"+"**. Name it `SecondBrain`, give it any description,
+   and under **Connection** enter the MCP server URL:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`
+3. Create the connection, then **Connect** and log in with **Apple or Google**, same
+   account as the SecondBrain app. ChatGPT lists the 12 memory tools when it's done.
 
 Then fully quit and reopen ChatGPT.
 
