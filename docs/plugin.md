@@ -14,15 +14,25 @@ login (OAuth), no tokens to paste, and works in Claude Code, Cowork, and claude.
 ## What's inside
 
 ```
+.claude-plugin/marketplace.json   ← catalog read by Claude
+.agents/plugins/marketplace.json  ← the same catalog, in OpenAI's format (ChatGPT/Codex)
+
 secondbrain/                      ← the plugin
-├── .claude-plugin/plugin.json    ← manifest (name, version)
+├── .claude-plugin/plugin.json    ← manifest for Claude (name, version)
+├── .codex-plugin/plugin.json     ← manifest for ChatGPT/Codex (adds the `interface` block)
 ├── .mcp.json                     ← the SecondBrain MCP connection (token-less; OAuth at runtime)
+├── assets/                       ← icon + light/dark logo, referenced by the manifest
 ├── skills/secondbrain-memory/    ← the memory skill (recall + save + organize + link)
 │   └── SKILL.md
 └── hooks/
     ├── hooks.json                ← SessionStart hook
     └── memory-primer.md          ← injected each session: "use SecondBrain as primary memory"
 ```
+
+Both runtimes read one plugin. Claude uses `.claude-plugin/`, ChatGPT/Codex prefer
+`.codex-plugin/` and `.agents/plugins/marketplace.json` and fall back to the Claude files
+when they're absent. The skill, the hook and `.mcp.json` are shared, so there is one
+source of truth and no duplicated content.
 
 | Component | Effect |
 |---|---|
@@ -89,6 +99,45 @@ The same from inside a session, as slash commands:
 Or interactively: `/plugin` → **Marketplaces** → add `fed3c3sa/secondbrain-shared-memory`
 → **Discover** → **SecondBrain Memory** → install (choose **User** scope to have it
 everywhere).
+
+### ChatGPT desktop app · Codex
+
+The ChatGPT desktop app runs the same plugin system (its `codex` runtime reads this
+repo's marketplace directly). Three commands, from a terminal:
+
+```bash
+codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
+codex plugin add secondbrain@secondbrain
+codex mcp login secondbrain
+```
+
+> **The third command is not optional.** Installing the plugin registers the
+> `secondbrain` MCP server but leaves it **signed out**, and nothing in the UI asks you
+> to sign in — so the memory tools never show up and the assistant reports that no
+> SecondBrain integration is connected. `codex mcp login secondbrain` runs the one-time
+> browser OAuth (Apple/Google) and stores the credential.
+
+Check it worked:
+
+```bash
+codex mcp list          # the `secondbrain` row must read Auth: OAuth, not Not logged in
+codex plugin list       # want: secondbrain@secondbrain — installed, enabled
+```
+
+Then fully quit and reopen ChatGPT, because the skill and the session hook load in a new
+session. If `codex` isn't on `PATH`, the app ships it at
+`/Applications/ChatGPT.app/Contents/Resources/codex` on macOS.
+
+### ChatGPT on the web (chatgpt.com)
+
+The web chat surface doesn't run locally installed plugins; it takes its tools from
+**connectors**, which live server-side. Add SecondBrain as a custom connector instead
+(needs a paid ChatGPT plan):
+
+1. **Settings → Apps → Advanced → Developer mode**, turn it on.
+2. **"+" → Add custom connector.** Name `SecondBrain`, URL
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**.
+3. **Connect** → log in with Apple/Google.
 
 ### Claude Desktop (chat app)
 
@@ -204,9 +253,16 @@ Notes for contributors:
 - The bundled `.mcp.json` is committed and contains **no secrets**, only the MCP
   endpoint URL. Auth is browser OAuth at runtime, so the `.gitignore` re-includes just
   this one file (`!secondbrain/.mcp.json`) while ignoring every other `.mcp.json`.
-- `version` is pinned in both `plugin.json` and `marketplace.json`. **Bump both** on each
-  release, or users won't receive the update (Claude Code keys updates off the version
-  string). Record changes in [`secondbrain/CHANGELOG.md`](../secondbrain/CHANGELOG.md).
+- `version` is pinned in `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json` and
+  `.claude-plugin/marketplace.json`. **Bump all three** on each release, or users won't
+  receive the update (both runtimes key updates off the version string). Record changes in
+  [`secondbrain/CHANGELOG.md`](../secondbrain/CHANGELOG.md).
+- The two marketplace catalogs must list the same plugin: `.claude-plugin/marketplace.json`
+  (Claude) and `.agents/plugins/marketplace.json` (ChatGPT/Codex, with the `policy` and
+  `category` fields that format requires).
+- `.mcp.json` carries `oauth_resource` for ChatGPT/Codex — it marks the endpoint as
+  OAuth-protected in the manifest, the way OpenAI's own Notion/Linear/Figma plugins do.
+  Claude Code ignores the key; keep it in sync with `url` if the endpoint ever moves.
 - The plugin's skill omits `allowed-tools` (so it isn't tied to a specific tool
   namespace); the standalone copy under `skill/` keeps `allowed-tools` for the
   `secondbrain-connect` setup. Keep the two `SKILL.md` bodies in sync.
@@ -219,6 +275,8 @@ Notes for contributors:
 
 | Symptom | Fix |
 |---|---|
+| ChatGPT: plugin installed, memory tools missing, no login ever offered | Run `codex mcp login secondbrain`, confirm `codex mcp list` shows `Auth: OAuth`, restart the app. Installing the plugin does not sign the MCP server in. |
+| ChatGPT web says no SecondBrain integration is connected | The web chat uses connectors, not local plugins. Add the custom connector (Developer mode) as described above. |
 | `/plugin` not recognized | Update Claude Code (`claude --version`); the plugin system needs a recent build. |
 | Plugin installed but skill missing | Run `/reload-plugins`, or restart. Check the `/plugin` **Errors** tab. |
 | Memory tools say `not_authenticated` | Claude Code: run `npx secondbrain-connect` (or ask Claude to). Cowork / claude.ai / Desktop: complete the browser sign-in your client prompts for (approve the SecondBrain connector). |

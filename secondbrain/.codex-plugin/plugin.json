@@ -1,0 +1,48 @@
+{
+  "name": "secondbrain",
+  "version": "0.4.0",
+  "description": "SecondBrain is your assistant's long-term memory: it recalls what matters at the start of a task and saves durable facts, decisions, preferences, people, and events on its own. Sign-in is a one-time browser login (Apple/Google) — no token to paste.",
+  "author": {
+    "name": "Federico Cesarini",
+    "url": "https://secondbrainmemory.com"
+  },
+  "homepage": "https://secondbrainmemory.com",
+  "repository": "https://github.com/fed3c3sa/secondbrain-shared-memory",
+  "license": "MIT",
+  "keywords": [
+    "memory",
+    "secondbrain",
+    "persistent-memory",
+    "recall",
+    "notes",
+    "calendar",
+    "reminders",
+    "knowledge"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "SecondBrain Memory",
+    "shortDescription": "One persistent memory your AI reads and writes, shared across apps",
+    "longDescription": "SecondBrain gives your assistant a real long-term memory. It recalls the relevant notes at the start of a task and saves durable facts, decisions, preferences, people, plans and events on its own, filed into your own folders — reminders and calendar events too. The memory is your private notes in the SecondBrain app, shared across ChatGPT, Claude and every other assistant you connect, so what one saves the others can read. Sign-in is a one-time browser login with Apple or Google, with no token to paste. Requires SecondBrain Pro.",
+    "developerName": "SecondBrain",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://secondbrainmemory.com",
+    "privacyPolicyURL": "https://secondbrainmemory.com/#privacy",
+    "termsOfServiceURL": "https://secondbrainmemory.com/#terms",
+    "defaultPrompt": [
+      "What do you remember about my current project?",
+      "Remember that I prefer short, direct answers.",
+      "Remind me to call the dentist tomorrow at 10."
+    ],
+    "brandColor": "#6C5CE7",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "screenshots": []
+  }
+}

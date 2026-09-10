@@ -98,6 +98,43 @@ claude plugin list
 - **`npx secondbrain-connect`:** ti ha fatto accedere e ha scritto la connessione dentro Claude Code, Claude Desktop e Cursor al posto tuo.
 - **Token di accesso:** creato e salvato per te. Non lo vedi e non lo digiti mai.
 
+### Usi ChatGPT?
+
+**App ChatGPT per desktop (Mac/Windows).** Stesso marketplace di Claude, tre comandi.
+Lanciali uno alla volta:
+
+```bash
+codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
+codex plugin add secondbrain@secondbrain
+codex mcp login secondbrain
+```
+
+L'ultimo apre il browser: clicca **Continua con Apple** o **Continua con Google**, lo
+stesso account dell'app SecondBrain. **Non saltarlo:** i primi due comandi installano il
+plugin ma lasciano la memoria *scollegata*, ed è per questo che altrimenti non succede
+niente.
+
+Controlla che funzioni:
+
+```bash
+codex mcp list
+```
+
+La riga `secondbrain` deve dire `Auth: OAuth`. Se dice `Not logged in`, rilancia
+`codex mcp login secondbrain`. Poi chiudi del tutto ChatGPT e riaprilo.
+
+> `codex` non trovato? L'app ChatGPT lo include. Su Mac usa il percorso completo:
+> `/Applications/ChatGPT.app/Contents/Resources/codex mcp login secondbrain`
+
+**ChatGPT dal browser (chatgpt.com).** La chat web non usa i plugin installati sul
+computer, quindi lì SecondBrain si aggiunge come **connettore** (serve un piano ChatGPT a
+pagamento):
+
+1. **Impostazioni → App → Avanzate → Modalità sviluppatore**, attivala.
+2. **"+" → Aggiungi connettore personalizzato.** Nome: `SecondBrain`. URL:
+   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Autenticazione: **OAuth**.
+3. Premi **Connect** e accedi con **Apple o Google**.
+
 ### Usi Cowork o Claude Desktop?
 
 1. Scarica **[secondbrain-plugin.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/dist/secondbrain-plugin.zip)** (dalla cartella [`dist/`](dist/)).
@@ -106,7 +143,7 @@ claude plugin list
 
 ### Usi altro? Un comando
 
-Per Cursor, ChatGPT, Gemini e altre app, lancia questo una volta (serve [Node.js](docs/install-node.md)), accedi con Apple o Google dal browser, poi riavvia l'app:
+Per Cursor, Gemini e altre app, lancia questo una volta (serve [Node.js](docs/install-node.md)), accedi con Apple o Google dal browser, poi riavvia l'app:
 
 ```bash
 npx secondbrain-connect
@@ -131,6 +168,7 @@ npx secondbrain-connect revoke --all  # scollega tutto
 
 - **Dice che serve Pro?** Attiva Pro nell'app SecondBrain, poi riprova.
 - **Hai visto `Dynamic Client Registration rejected (HTTP 404)`?** Arriva dal pulsante di accesso interno di Claude Code, ed è un nostro bug, non un tuo errore. Lancia `npx secondbrain-connect` e riavvia Claude Code. Quel comando non usa affatto quel pulsante. Una correzione vera è in arrivo.
+- **L'hai installato su ChatGPT e non succede niente?** Il plugin installa la memoria ma non fa l'accesso. Lancia `codex mcp login secondbrain`, controlla che `codex mcp list` dica `Auth: OAuth`, poi riavvia ChatGPT.
 - **Gli strumenti dicono `not_authenticated`?** Lancia `npx secondbrain-connect`, poi chiudi del tutto e riapri l'app.
 - **L'accesso non si è aperto?** Prova `npx secondbrain-connect --google`, oppure incolla nel browser il link che stampa.
 - **`npx` non trovato?** Installa Node.js ([guida](docs/install-node.md)), poi apri un terminale nuovo.

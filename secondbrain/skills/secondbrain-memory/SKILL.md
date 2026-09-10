@@ -60,6 +60,23 @@ depends on the surface:
   server's `WWW-Authenticate` challenge, so the discovery gap above doesn't affect them.
 - **Claude Desktop (app):** *Settings → Connectors* → add/connect SecondBrain (same URL),
   or run `npx secondbrain-connect`.
+- **ChatGPT desktop app / Codex:** installing the plugin registers the `secondbrain` MCP
+  server but **does not sign it in** — that is a separate, one-time step, and it is the
+  usual reason the memory tools are missing. **You** run it:
+  ```bash
+  codex mcp login secondbrain
+  ```
+  It opens the browser for the Apple/Google login and stores the OAuth credential.
+  Verify with `codex mcp list` — the `secondbrain` row must read `Auth: OAuth`, not
+  `Not logged in`. Then restart the app/session. If `codex` isn't on PATH, the ChatGPT
+  desktop app ships it at
+  `/Applications/ChatGPT.app/Contents/Resources/codex` (macOS).
+- **ChatGPT on the web (chatgpt.com):** the chat surface takes its tools from
+  **connectors**, not from a locally installed plugin, so the sign-in is a user UI action.
+  Tell the user: *Settings → Apps → Advanced → **Developer mode*** (needs a paid plan),
+  then **"+" → Add/Create custom connector**, name **SecondBrain**, URL
+  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth** →
+  **Connect** → log in with Apple/Google.
 
 Never abandon the task on an auth error, and never paste or print a token. If sign-in
 reports `pro_required`, the memory is a Pro feature — have the user open the SecondBrain

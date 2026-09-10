@@ -3,6 +3,35 @@
 All notable changes to the **SecondBrain Memory** plugin are documented here.
 This project follows [semantic versioning](https://semver.org).
 
+## [0.4.0] — 2026-09-10
+
+Works in the **ChatGPT desktop app / Codex** too, from the same marketplace.
+
+### Added
+- **OpenAI plugin manifest** (`secondbrain/.codex-plugin/plugin.json`). ChatGPT and Codex
+  already read the Claude manifest as a fallback, but only this one carries the
+  `interface` block, so the plugin now shows its display name, category, logo, brand
+  colour, starter prompts and website instead of "Website: not available".
+- **OpenAI marketplace catalog** (`.agents/plugins/marketplace.json`) alongside the Claude
+  one, with `policy.installation: AVAILABLE` and `policy.authentication: ON_INSTALL` so
+  the app knows the plugin needs an account connection at install time.
+- **Plugin assets** (`secondbrain/assets/`) for the icon and light/dark logos, since
+  manifest asset paths must resolve inside the plugin.
+
+### Changed
+- **`.mcp.json` now declares `oauth_resource`**, matching OpenAI's own official plugins
+  (Notion, Linear, Figma). It marks the endpoint as OAuth-protected in the manifest
+  itself, rather than leaving the client to discover it by probing. Claude Code ignores
+  the extra key — `claude plugin validate --strict` still passes and the Claude flow is
+  untouched.
+- **Skill, primer and docs now name the missing step on ChatGPT/Codex.** Installing the
+  plugin registers the `secondbrain` MCP server but leaves it **signed out**, which is
+  why the memory tools never appeared and no login was ever offered. The one-time fix is
+  `codex mcp login secondbrain`; `codex mcp list` must then read `Auth: OAuth`.
+- Documented that **chatgpt.com** (the web chat surface) takes its tools from a
+  **connector**, not from a locally installed plugin: Settings → Apps → Advanced →
+  Developer mode → custom connector → same MCP URL → OAuth.
+
 ## [0.3.1] — 2026-09-01
 
 Claude Code installs and connects itself. Nothing to copy or paste.

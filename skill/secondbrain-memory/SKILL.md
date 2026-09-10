@@ -113,6 +113,31 @@ token for you, so you never need to see or show one. If sign-in reports `pro_req
 tell the user the memory is a Pro feature and they should open the SecondBrain app and
 upgrade to Pro (the only way to go Pro). Pass along the `upgrade_url`.
 
+### On the ChatGPT desktop app / Codex
+
+The same marketplace works there, with `codex` instead of `claude`:
+
+```bash
+codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
+codex plugin add secondbrain@secondbrain
+codex mcp login secondbrain
+```
+
+The third command is the one people miss: installing the plugin registers the
+`secondbrain` MCP server but leaves it **signed out**, so the memory tools never
+appear. `codex mcp login secondbrain` opens the browser for the one-time
+Apple/Google login. Verify with `codex mcp list` — the `secondbrain` row must read
+`Auth: OAuth`, not `Not logged in` — then have the user restart the app.
+If `codex` isn't on PATH, the ChatGPT desktop app ships it at
+`/Applications/ChatGPT.app/Contents/Resources/codex` (macOS).
+
+**ChatGPT on the web (chatgpt.com)** is different: the chat surface gets its tools
+from **connectors**, not from a locally installed plugin, so there is nothing you can
+run. Tell the user: *Settings → Apps → Advanced → **Developer mode*** (needs a paid
+plan), then **"+" → Add/Create custom connector**, name **SecondBrain**, URL
+`https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, authentication **OAuth**
+→ **Connect** → log in with Apple/Google.
+
 ## Recall (read first)
 
 At the start of a task, and whenever the user refers to anything prior, search
