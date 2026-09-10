@@ -100,28 +100,16 @@ claude plugin list
 - **`npx secondbrain-connect`:** signed you in and wrote the connection into Claude Code, Claude Desktop and Cursor for you.
 - **Access token:** created and saved for you. You never see it or type it.
 
-### Using ChatGPT?
+### Using Codex or ChatGPT Work?
 
-Do this on **chatgpt.com in a browser**, once. It then works in the ChatGPT desktop app
-too, because the connection belongs to your ChatGPT account. Needs a paid ChatGPT plan.
+Same marketplace as Claude. Three steps, all in the app:
 
-1. **Settings → Security and login → Developer mode**, turn it on. (Older builds put it
-   under **Settings → Apps → Advanced**.)
-2. Go to **Plugins** and press **"+"**. Name it `SecondBrain`, give it any description,
-   and under **Connection** enter the MCP server URL:
-   `https://mcp.secondbrainmemory.com/mcp`
-3. Create the connection, then **Connect** and log in with **Apple or Google**, same
-   account as the SecondBrain app. ChatGPT lists the 12 memory tools when it's done.
+1. **Plugins → Add → Add marketplace**, paste `fed3c3sa/secondbrain-shared-memory`.
+2. Install **SecondBrain Memory** from the list.
+3. Type **"connect to my SecondBrain"** in the chat. It opens your browser — click
+   **Apple** or **Google**, same account as the SecondBrain app. Done.
 
-Then fully quit and reopen ChatGPT.
-
-> **Why not the plugin?** ChatGPT's chat gets its tools from *connectors* in your account,
-> not from a plugin installed off a marketplace. Installing our plugin in ChatGPT gives it
-> the memory *skill*, but no memory tools — the assistant will say it can see SecondBrain
-> but has nothing to query it with. The connector above is what actually connects it.
-
-**Using Codex** (the `codex` CLI, or the Codex side of the ChatGPT app)? That one *does*
-run the plugin, from the same marketplace as Claude:
+Prefer the terminal? Same thing:
 
 ```bash
 codex plugin marketplace add fed3c3sa/secondbrain-shared-memory
@@ -129,9 +117,16 @@ codex plugin add secondbrain@secondbrain
 codex mcp login secondbrain
 ```
 
-The last command opens your browser for the Apple/Google login. **Don't skip it** — the
-first two install the plugin but leave the memory *signed out*. Check with
-`codex mcp list`: the `secondbrain` row must say `Auth: OAuth`.
+Check with `codex mcp list`: the `secondbrain` row must say `Auth: OAuth`. Then fully quit
+and reopen the app.
+
+> **The plain ChatGPT chat is a different surface.** It takes its tools from connectors in
+> your ChatGPT account, not from an installed plugin, so the marketplace doesn't reach it —
+> the assistant will say it can see SecondBrain but has nothing to query it with. On
+> **Plus** and above you can add it by hand today: Settings → Security and login →
+> Developer mode, then Plugins → "+" → paste
+> `https://mcp.secondbrainmemory.com/mcp` under **Connection**. We're publishing
+> SecondBrain to the ChatGPT plugin directory so it becomes a one-click install there too.
 
 ### Using Cowork or Claude Desktop?
 
