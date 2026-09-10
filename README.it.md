@@ -108,7 +108,7 @@ ChatGPT a pagamento.
    versioni più vecchie sta in **Impostazioni → App → Avanzate**.)
 2. Vai su **Plugin** e premi **"+"**. Chiamalo `SecondBrain`, mettici una descrizione
    qualsiasi e sotto **Connessione** inserisci l'URL del server MCP:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`
+   `https://mcp.secondbrainmemory.com/mcp`
 3. Crea la connessione, poi premi **Connect** e accedi con **Apple o Google**, lo stesso
    account dell'app SecondBrain. A fine setup ChatGPT elenca i 12 strumenti della memoria.
 
@@ -165,7 +165,7 @@ npx secondbrain-connect revoke --all  # scollega tutto
 ## Hai bisogno di aiuto?
 
 - **Dice che serve Pro?** Attiva Pro nell'app SecondBrain, poi riprova.
-- **Hai visto `Dynamic Client Registration rejected (HTTP 404)`?** Arriva dal pulsante di accesso interno di Claude Code, ed è un nostro bug, non un tuo errore. Lancia `npx secondbrain-connect` e riavvia Claude Code. Quel comando non usa affatto quel pulsante. Una correzione vera è in arrivo.
+- **Hai visto `Dynamic Client Registration rejected (HTTP 404)`?** Era un nostro bug, non un tuo errore, ed è **risolto**: la memoria ora sta su `https://mcp.secondbrainmemory.com/mcp`, che espone i documenti di discovery OAuth dove le specifiche dicono che devono stare. Reinstalla il plugin (o punta la connessione a quell'URL) e l'accesso interno di Claude Code funziona. `npx secondbrain-connect` continua a funzionare.
 - **ChatGPT dice che vede SecondBrain ma non ha strumenti per interrogarlo?** È il plugin senza il connettore. La chat di ChatGPT prende gli strumenti solo dai connettori: aggiungi il connettore personalizzato qui sopra, poi riavvia ChatGPT.
 - **L'hai installato su Codex e non succede niente?** Il plugin installa la memoria ma non fa l'accesso. Lancia `codex mcp login secondbrain`, controlla che `codex mcp list` dica `Auth: OAuth`, poi riavvia.
 - **Gli strumenti dicono `not_authenticated`?** Lancia `npx secondbrain-connect`, poi chiudi del tutto e riapri l'app.
@@ -192,7 +192,7 @@ Altre soluzioni: **[Risoluzione problemi](docs/troubleshooting.md)** (in inglese
 ## Avanzate
 
 - **Plugin Claude, guida completa** (accesso per ogni app, zip offline, troubleshooting): [docs/plugin.md](docs/plugin.md) (in inglese)
-- **Aggiungere la connessione a mano** (qualsiasi app con MCP remoto): puntala su `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp` (transport `http`) e accedi dal browser quando richiesto.
+- **Aggiungere la connessione a mano** (qualsiasi app con MCP remoto): puntala su `https://mcp.secondbrainmemory.com/mcp` (transport `http`) e accedi dal browser quando richiesto.
 - **Installare solo la skill** (senza plugin): metti [`skill/secondbrain-memory/SKILL.md`](skill/secondbrain-memory/SKILL.md) nella cartella skill del tuo strumento (es. `~/.claude/skills/`), oppure carica [secondbrain-memory.zip](https://github.com/fed3c3sa/secondbrain-shared-memory/raw/main/skill/secondbrain-memory.zip) in Claude Desktop (**Settings → Capabilities → Skills**).
 
 ---

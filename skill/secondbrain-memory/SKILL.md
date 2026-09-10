@@ -93,10 +93,11 @@ claude mcp get secondbrain
 **If the in-client browser sign-in fails** — `/mcp`, `claude mcp login secondbrain`, or
 an "authenticate" prompt erroring with
 `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`
-— that is a **known server-side gap, not the user's fault**: Claude Code's bundled MCP
-SDK looks for OAuth discovery documents at the origin root, which a Supabase Edge
-Function origin cannot serve. A proxy fix is in progress. Do **not** retry that path and
-do **not** ask the user to paste anything. Instead:
+— the connection is pointed at the **old endpoint**. That error came from Claude Code's
+bundled MCP SDK looking for the OAuth discovery documents at the origin root, which a
+Supabase Edge Function origin cannot serve. The memory now lives at
+`https://mcp.secondbrainmemory.com/mcp`, which serves them there. It is not the user's
+fault and there is nothing for them to paste. Instead:
 
 1. Re-run `npx secondbrain-connect` yourself. It configures the connection with an
    `Authorization: Bearer` header, which bypasses OAuth discovery entirely and works today.
@@ -143,7 +144,7 @@ Tell them, once: on **chatgpt.com in a browser**, *Settings → **Security and l
 → **Developer mode*** (older builds: *Settings → Apps → Advanced*; needs a paid ChatGPT
 plan). Then go to **Plugins**, press **"+"**, name it **SecondBrain**, and under
 **Connection** paste the MCP server URL
-`https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Create the connection, then
+`https://mcp.secondbrainmemory.com/mcp`. Create the connection, then
 **Connect** and log in with Apple/Google. It belongs to the ChatGPT account, so it then
 works in the desktop app too. Restart ChatGPT and retry.
 

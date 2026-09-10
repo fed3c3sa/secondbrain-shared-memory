@@ -157,7 +157,7 @@ web alike. Do it once on **chatgpt.com in a browser** (needs a paid ChatGPT plan
    **Settings → Apps → Advanced**.)
 2. Go to **Plugins**, press **"+"**, give it a name and description, and under
    **Connection** enter the MCP server URL, `/mcp` path included:
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`
+   `https://mcp.secondbrainmemory.com/mcp`
 3. Create the connection, then **Connect** and log in with Apple/Google. ChatGPT shows
    the discovered tools when it's done.
 
@@ -216,7 +216,7 @@ Connectors**):
 
 1. If **SecondBrain** is listed (from the plugin), press **Connect**. Otherwise press
    **"+" → Add custom connector** and enter the URL
-   `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, then **Add**.
+   `https://mcp.secondbrainmemory.com/mcp`, then **Add**.
 2. Press **Connect** → a browser opens → log in with **Apple/Google** → done.
 
 > On the web, only the Connectors **Connect** button can store the token. The assistant
@@ -228,13 +228,18 @@ just ask Claude to connect you and it runs it for itself. One browser login and 
 connection is written into your config. No Node? See the
 **[Node installer guide](install-node.md)**.
 
-> Prefer `secondbrain-connect` over `/mcp` / `claude mcp login secondbrain` here. Claude
-> Code's bundled MCP SDK looks for the OAuth discovery documents at the **origin root**,
-> which a Supabase Edge Function origin can't serve, so that path currently fails with
-> `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`.
-> A proxy on a domain we control fixes it; until then `secondbrain-connect` writes a
-> header-based connection that skips discovery entirely. Cowork, claude.ai, and Desktop
-> follow the server's `WWW-Authenticate` challenge instead, so they are unaffected.
+> **The `Dynamic Client Registration rejected (HTTP 404)` era is over.** Claude Code's
+> bundled MCP SDK looks for the OAuth discovery documents at the **origin root**, which a
+> Supabase Edge Function origin can't serve — so `/mcp` and `claude mcp login secondbrain`
+> failed with `{"error":"requested path is invalid"}` and `secondbrain-connect` existed to
+> skip discovery entirely. The endpoint now lives at `https://mcp.secondbrainmemory.com/mcp`,
+> which serves those documents at the root as RFC 8414 / RFC 9728 require. The full chain
+> was verified against the live endpoint: 401 challenge → protected-resource metadata →
+> origin-root AS metadata → `POST /register` **201** → `/authorize` 302 → `/token`.
+> `secondbrain-connect` still works and is still the zero-click path.
+>
+> The old `…supabase.co/functions/v1/mcp` URL keeps answering exactly as before, so
+> anything already connected stays connected.
 
 **Claude Desktop (app).** **Settings → Connectors** → SecondBrain → **Connect** → log in.
 
@@ -305,7 +310,7 @@ Notes for contributors:
 | `/plugin` not recognized | Update Claude Code (`claude --version`); the plugin system needs a recent build. |
 | Plugin installed but skill missing | Run `/reload-plugins`, or restart. Check the `/plugin` **Errors** tab. |
 | Memory tools say `not_authenticated` | Claude Code: run `npx secondbrain-connect` (or ask Claude to). Cowork / claude.ai / Desktop: complete the browser sign-in your client prompts for (approve the SecondBrain connector). |
-| `Dynamic Client Registration rejected (HTTP 404)` in Claude Code | Expected for now, see the note under **Sign in**. Use `npx secondbrain-connect` instead of `/mcp`; verify with `claude mcp get secondbrain`. |
+| `Dynamic Client Registration rejected (HTTP 404)` in Claude Code | Fixed — you're on the old endpoint. Reinstall the plugin, or repoint the connection at `https://mcp.secondbrainmemory.com/mcp`, which serves discovery at the origin root. |
 | No browser sign-in prompt appears | Trigger a memory action (e.g. ask Claude to recall something) so the client connects and offers sign-in; or add SecondBrain as a connector in your client's settings. |
 | `pro_required` after sign-in | The memory is a Pro feature, so open the SecondBrain app and turn on **Pro**, then retry. |
 | Stale after an update | `/plugin marketplace update secondbrain` then `/reload-plugins`. |

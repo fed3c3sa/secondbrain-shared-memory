@@ -40,12 +40,12 @@ depends on the surface:
   ```
   It opens the browser for the Apple/Google login and writes the connection plus its
   access token into the config. Verify with `claude mcp get secondbrain`, then have the
-  user restart once. Prefer this over `/mcp` or `claude mcp login secondbrain`: those go
-  through standalone OAuth discovery, which fails today with
-  `Dynamic Client Registration rejected (HTTP 404): {"error":"requested path is invalid"}`
-  — a **known server-side gap** (Claude Code's bundled MCP SDK probes the origin root,
-  which a Supabase Edge Function origin cannot serve; a proxy fix is in progress), not a
-  user mistake. If `npx`/Node is missing, give the user the installer guide
+  user restart once. `/mcp` and `claude mcp login secondbrain` also work now: the
+  `Dynamic Client Registration rejected (HTTP 404)` failure came from the old endpoint,
+  whose origin the SDK's spec-literal discovery couldn't reach, and the endpoint has moved
+  to `https://mcp.secondbrainmemory.com/mcp`, which serves discovery at the origin root.
+  If a user still hits that error they are on the old URL — reinstall the plugin.
+  If `npx`/Node is missing, give the user the installer guide
   (Windows · macOS · Linux):
   <https://github.com/fed3c3sa/secondbrain-shared-memory/blob/main/docs/install-node.md>,
   then run the command again yourself.
@@ -55,7 +55,7 @@ depends on the surface:
   **Connector**. Tell the user: *Customize → Connectors* (Team/Enterprise:
   *Organization settings → Connectors*) → if **SecondBrain** is listed, press **Connect**;
   otherwise press **"+" → Add custom connector**, enter the URL
-  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`, **Add**, then **Connect**.
+  `https://mcp.secondbrainmemory.com/mcp`, **Add**, then **Connect**.
   A browser opens → log in with Apple/Google → done. Then retry. These clients follow the
   server's `WWW-Authenticate` challenge, so the discovery gap above doesn't affect them.
 - **Claude Desktop (app):** *Settings → Connectors* → add/connect SecondBrain (same URL),
@@ -70,7 +70,7 @@ depends on the surface:
   *Settings → **Security and login** → **Developer mode*** (older builds: *Settings →
   Apps → Advanced*; needs a paid ChatGPT plan), then go to **Plugins**, press **"+"**,
   name it **SecondBrain**, and under **Connection** paste the MCP server URL
-  `https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp`. Create the connection, then
+  `https://mcp.secondbrainmemory.com/mcp`. Create the connection, then
   **Connect** and log in with Apple/Google. It belongs to the ChatGPT account, so it then
   works in the desktop app too. Restart ChatGPT and retry.
 - **Codex (the CLI, and the Codex surface in the ChatGPT app):** here the plugin's MCP

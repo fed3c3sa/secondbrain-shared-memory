@@ -3,6 +3,41 @@
 All notable changes to the **SecondBrain Memory** plugin are documented here.
 This project follows [semantic versioning](https://semver.org).
 
+## [0.5.0] — 2026-09-10
+
+The memory moves to **`https://mcp.secondbrainmemory.com/mcp`**, a domain we control.
+Claude Code's own sign-in button works again, and ChatGPT submission is unblocked.
+
+### Changed
+- **New MCP endpoint.** The server itself did not move — a small Cloudflare Worker
+  fronts the same Supabase Edge Functions. What the new origin can do that the old one
+  couldn't is serve `/.well-known/*` at the **origin root**, which Supabase's gateway
+  owns and answers `{"error":"requested path is invalid"}` for.
+- **`Dynamic Client Registration rejected (HTTP 404)` is fixed.** That was never a user
+  error: RFC 8414 and RFC 9728 place discovery at the origin root, Claude Code's bundled
+  MCP SDK follows that literally, and our origin couldn't answer. Verified end to end
+  against the live endpoint — 401 challenge → protected-resource metadata → origin-root
+  AS metadata → `POST /register` **201** → `/authorize` 302 → `/token` — plus a real MCP
+  client completing a full browser sign-in through the new domain.
+- Skill, primer, READMEs, troubleshooting and the website now carry the new URL and
+  stop treating the DCR error as expected.
+
+### Server side (shipped separately)
+- **`/userinfo`** (OpenID Connect Core §5.3) on the authorization server, returning
+  `sub`, `email` and `email_verified` for the same opaque PAT the MCP server takes.
+  `userinfo_endpoint` is advertised in both discovery documents and the AS now
+  advertises the `openid` and `email` scopes. OpenAI requires this before a plugin
+  carrying an MCP server may be submitted.
+- **`/.well-known/openai-apps-challenge`** is served from the new origin, ready for the
+  domain verification step of that submission.
+
+### Nothing breaks
+The old `…supabase.co/functions/v1/mcp` URL answers exactly as before — protected-resource
+metadata and the 401 challenge were diffed byte for byte against a pre-deploy snapshot —
+so every already-connected client stays connected. Access tokens are opaque PATs
+validated by hash, not audience-bound JWTs, so one token works through either front door.
+`npx secondbrain-connect` is unchanged and still writes the old URL, which is fine.
+
 ## [0.4.2] — 2026-09-10
 
 Right menu path for ChatGPT: OpenAI moved Developer mode, and the connector is created

@@ -2,8 +2,8 @@
   "mcpServers": {
     "secondbrain": {
       "type": "http",
-      "url": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp",
-      "oauth_resource": "https://ntykytpngslkytfyuaee.supabase.co/functions/v1/mcp"
+      "url": "https://mcp.secondbrainmemory.com/mcp",
+      "oauth_resource": "https://mcp.secondbrainmemory.com/mcp"
     }
   }
 }

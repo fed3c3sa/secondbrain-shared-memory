@@ -11,15 +11,18 @@ Node.js is not installed yet, or your terminal was open before you installed it.
 
 ## "Dynamic Client Registration rejected (HTTP 404)" in Claude Code
 
-You pressed the sign-in button inside Claude Code (`/mcp`, or `claude mcp login secondbrain`) and got that error. Nothing is wrong on your side.
+You pressed the sign-in button inside Claude Code (`/mcp`, or `claude mcp login secondbrain`) and got that error. Nothing is wrong on your side — and it is **fixed**.
 
-Claude Code looks for our sign-in details at an address our server cannot answer on, so its built-in login fails. One command fixes it, because it skips that login entirely:
+Claude Code looked for our sign-in details at an address our old server could not answer on. The memory now lives at `https://mcp.secondbrainmemory.com/mcp`, which answers there properly. If you still see the error, your connection is on the old address. Update the plugin:
 
 ```bash
-npx secondbrain-connect
+claude plugin marketplace update secondbrain
+claude plugin install secondbrain@secondbrain --scope user
 ```
 
-Then fully quit Claude Code and open it again. Check with `claude mcp get secondbrain`, it should say `Status: ✔ Connected`. A proper server-side fix is planned.
+Then fully quit Claude Code and open it again, and sign in with `/mcp`.
+
+`npx secondbrain-connect` also still works and skips the sign-in button entirely. Check either way with `claude mcp get secondbrain`, it should say `Status: ✔ Connected`.
 
 ## It says I need Pro
 
